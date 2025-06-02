@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="zh-cn"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.png"><meta name="generator" content="Astro v5.7.13"><!-- Canonical URL --><link rel="canonical" href="https://www.hysling.top/blog/proxy/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A-dns-%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90"><link rel="alternate" type="application/rss+xml" title="Lyndra's Blog" href="/rss.xml"><!-- Primary Meta Tags --><meta name="title" content="网络原理及 DNS 泄漏简析 - Lyndra's Blog"><meta name="description" content="素处以默"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://www.hysling.top/blog/proxy/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A-dns-%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90"><meta property="og:title" content="网络原理及 DNS 泄漏简析 - Lyndra's Blog"><meta property="og:description" content="素处以默"><meta property="og:image" content="https://www.hysling.top/blog/proxy/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A-dns-%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90"><!-- <meta property="og:image:alt" content={site.description}/> --><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://www.hysling.top/blog/proxy/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A-dns-%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90"><meta property="twitter:title" content="网络原理及 DNS 泄漏简析 - Lyndra's Blog"><meta property="twitter:description" content="素处以默"><meta property="twitter:image" content="https://www.hysling.top/blog/proxy/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A-dns-%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="sitemap" href="/sitemap-0.xml"><title>网络原理及 DNS 泄漏简析 - Lyndra&#39;s Blog</title><script src="/toggle-theme.js"></script><script async type="text/javascript" src="/load-mathjax.js"></script><script async type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><link rel="stylesheet" href="/_astro/WalineComment.XaQ6XQsx.css">
+<link rel="stylesheet" href="/_astro/BlogPost.BUYUBhIy.css">
+<link rel="stylesheet" href="/_astro/about.gIe6_up2.css">
+<link rel="stylesheet" href="/_astro/_slug_.DYqrg3Zi.css">
+<style>#donate-item-img{filter:grayscale(1)}#donate-item-img:hover{filter:blur(0px);cursor:pointer}.esa-sponsor{position:relative;width:100%;margin:40px 0}.esa-sponsor .qrshow{position:absolute;width:200px;height:200px;cursor:pointer;left:calc(50% - 100px);top:-170px;z-index:999;display:none;box-shadow:0 1px 15px #1b1f2326,0 0 1px #6a737d59}
+.post-title[data-astro-cid-6t6zfk7k]:hover{outline:0;color:#cc7a00;text-shadow:1px 1px 1px #ffd147}.toc_container[data-astro-cid-6t6zfk7k]{overflow-y:scroll;scrollbar-width:none;-ms-overflow-style:none}.toc_container[data-astro-cid-6t6zfk7k]::-webkit-scrollbar{width:0;height:0}.toc_container[data-astro-cid-6t6zfk7k] a[data-astro-cid-6t6zfk7k]{text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+</style></head><body class="bg-skin-secondary"> <header class="fixed top-0 w-full bg-skin-fill text-skin-base z-10"> <div class="flex items-center justify-between container"> <div class="block xl:hidden"> <button type="button" id="menu-icon" class="header-btn" title="Menu"> <i class="ri-menu-fill"></i> </button> <button type="button" id="menu-icon-close" class="header-btn hidden" title="Menu"> <i class="ri-close-fill"></i> </button> <script type="module">let n=document.getElementById("menu-icon"),t=document.getElementById("menu-icon-close"),l=document.getElementById("mobile-menu"),e=document.getElementById("aside-btn"),i=document.getElementById("aside-close-btn"),s=document.getElementById("personal-info");n.addEventListener("click",()=>{e&&e.classList.contains("hidden")&&d([e,i,s]),d([n,t,l])});t.addEventListener("click",()=>{d([n,t,l])});function d(o){o.forEach(c=>{c.classList.toggle("hidden")})}</script> </div> <a class="text-2xl p-4" href="/">Lyndra&#39;s Blog</a> <div class="flex items-center"> <div class="hidden xl:block"> <div class="flex items-center space-x-5 pr-4"> <div class="box relative h-10 w-auto flex items-center" data-astro-cid-eimmu3lg> <a href="/blog/1" target="_self" class="header-link-active hover:header-link-hover" data-astro-cid-eimmu3lg> <i class="ri-draft-line" data-astro-cid-eimmu3lg></i> 博客  </a>  </div> <div class="box relative h-10 w-auto flex items-center" data-astro-cid-eimmu3lg> <a href="/feed/1" target="_self" class="hover:header-link-hover" data-astro-cid-eimmu3lg> <i class="ri-lightbulb-flash-line" data-astro-cid-eimmu3lg></i> 动态  </a>  </div> <div class="box relative h-10 w-auto flex items-center" data-astro-cid-eimmu3lg> <a href="/archive/1" target="_self" class="hover:header-link-hover" data-astro-cid-eimmu3lg> <i class="ri-archive-line" data-astro-cid-eimmu3lg></i> 归档  </a>  </div> <div class="box relative h-10 w-auto flex items-center" data-astro-cid-eimmu3lg> <a href="/message" target="_self" class="hover:header-link-hover" data-astro-cid-eimmu3lg> <i class="ri-chat-1-line" data-astro-cid-eimmu3lg></i> 留言  </a>  </div> <div class="box relative h-10 w-auto flex items-center" data-astro-cid-eimmu3lg> <a href="/search" target="_self" class="hover:header-link-hover" data-astro-cid-eimmu3lg> <i class="ri-search-line" data-astro-cid-eimmu3lg></i> 搜索  </a>  </div> <div class="box relative h-10 w-auto flex items-center" data-astro-cid-eimmu3lg> <a href="javascript:void(0);" target="_self" class="hover:header-link-hover" data-astro-cid-eimmu3lg> <i class="ri-more-fill" data-astro-cid-eimmu3lg></i> 更多 <i class="ri-arrow-down-s-line" data-astro-cid-eimmu3lg></i> </a> <div class="dropdown cursor-pointer border rounded bg-skin-fill p-4" data-astro-cid-eimmu3lg> <ul class="space-y-4 w-28" data-astro-cid-eimmu3lg> <li class="text-center hover:text-skin-active select-none" data-astro-cid-eimmu3lg> <i class="ri-information-line" data-astro-cid-eimmu3lg></i> <a target="_self" href="/about" data-astro-cid-eimmu3lg>关于本站</a> </li><li class="text-center hover:text-skin-active select-none" data-astro-cid-eimmu3lg> <i class="ri-user-5-line" data-astro-cid-eimmu3lg></i> <a target="_self" href="/friends" data-astro-cid-eimmu3lg>友情链接</a> </li> </ul> </div> </div>  </div> </div> <button type="button" id="theme-btn" class="header-btn" title="Toggles light & dark" aria-label="auto" aria-live="polite"> <i id="moon-icon" class="ri-sun-line"></i> <i id="sun-icon" class="ri-moon-line"></i> </button> <div class="block xl:hidden"> <button type="button" id="aside-btn" class="header-btn" title="Open Aside Bar" aria-label="auto" aria-live="polite"> <i class="ri-user-line"></i> </button> <button type="button" id="aside-close-btn" class="header-btn hidden" title="Close Aside Bar" aria-label="auto" aria-live="polite"> <i class="ri-close-fill"></i> </button> <div id="blog-aside" class="absolute top-16 bg-skin-fill right-0 blog-aside hidden"></div> <script type="module">let n=document.getElementById("aside-btn"),t=document.getElementById("aside-close-btn"),e=document.getElementById("menu-icon"),i=document.getElementById("menu-icon-close"),s=document.getElementById("mobile-menu"),l=document.getElementById("personal-info");n.addEventListener("click",()=>{e&&e.classList.contains("hidden")&&d([e,i,s]),d([n,t,l])});t.addEventListener("click",()=>{d([t,l,n])});function d(o){o.forEach(c=>{c.classList.toggle("hidden")})}</script> </div> </div> </div> <div id="mobile-menu" class="hidden text-center overflow-y-auto pb-8" style="height: calc(100vh - 64px)"> <div class="py-2"> <a class=" hover:text-skin-active" href="/blog/1"> <i class="ri-draft-line"></i> <span>博客</span> </a>  <div class="space-y-4 text-sm">  </div> </div><div class="py-2"> <a class=" hover:text-skin-active" href="/feed/1"> <i class="ri-lightbulb-flash-line"></i> <span>动态</span> </a>  <div class="space-y-4 text-sm">  </div> </div><div class="py-2"> <a class=" hover:text-skin-active" href="/archive/1"> <i class="ri-archive-line"></i> <span>归档</span> </a>  <div class="space-y-4 text-sm">  </div> </div><div class="py-2"> <a class=" hover:text-skin-active" href="/message"> <i class="ri-chat-1-line"></i> <span>留言</span> </a>  <div class="space-y-4 text-sm">  </div> </div><div class="py-2"> <a class=" hover:text-skin-active" href="/search"> <i class="ri-search-line"></i> <span>搜索</span> </a>  <div class="space-y-4 text-sm">  </div> </div><div class="py-2"> <a class=" hover:text-skin-active" href="javascript:void(0);"> <i class="ri-more-fill"></i> <span>更多</span> </a> <div class="divider-horizontal"></div> <div class="space-y-4 text-sm"> <a class="block hover:text-skin-active" href="/about"> <i class="ri-information-line"></i> <span>关于本站</span> </a><a class="block hover:text-skin-active" href="/friends"> <i class="ri-user-5-line"></i> <span>友情链接</span> </a> </div> </div> </div> <div id="personal-info" class="hidden break-all overflow-y-auto pb-8" style="height: calc(100vh - 64px)"> <img class="avatar my-4 mx-auto" src="/avatar.svg" alt="avatar"> <div class="mb-2 text-center">本来无一物，何处惹尘埃</div> <div class="flex items-center justify-center flex-wrap"> <a title="github" href="https://github.com/codetang-2417" target="_blank"> <i class="ri-github-fill text-2xl mr-2 cursor-pointer"></i> </a><a title="rss" href target="_blank"> <i class="ri-rss-fill text-2xl mr-2 cursor-pointer"></i> </a> </div> <div class="divider-horizontal-mini"></div> <div class="text-center"> <div> <i class="ri-folder-3-line menu-icon"></i>分类 </div> <div class="my-2 break-all truncate"> <a class="hover:text-skin-active" title="工具教程 (16)" href="/category/工具教程"> 工具教程 (16) </a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active" title="专业知识 (4)" href="/category/专业知识"> 专业知识 (4) </a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active" title="编程开发 (8)" href="/category/编程开发"> 编程开发 (8) </a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active" title="系统维护 (21)" href="/category/系统维护"> 系统维护 (21) </a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active" title="网络安全 (7)" href="/category/网络安全"> 网络安全 (7) </a> </div> <div class="divider-horizontal-mini"></div>
+          <div class="text-center"> <i class="ri-price-tag-3-line menu-icon"></i> 标签 </div> <div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="AI" href="/tags/AI">AI (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="iPhone" href="/tags/iPhone">iPhone (2)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Performance" href="/tags/Performance">Performance (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Linux" href="/tags/Linux">Linux (17)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Manjaro" href="/tags/Manjaro">Manjaro (8)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Bash" href="/tags/Bash">Bash (2)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Server" href="/tags/Server">Server (8)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Network" href="/tags/Network">Network (4)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Hardware" href="/tags/Hardware">Hardware (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Astro" href="/tags/Astro">Astro (2)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Github" href="/tags/Github">Github (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Blog" href="/tags/Blog">Blog (3)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Siyuan" href="/tags/Siyuan">Siyuan (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Archlinux" href="/tags/Archlinux">Archlinux (2)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Shell" href="/tags/Shell">Shell (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Downgrade" href="/tags/Downgrade">Downgrade (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Cursor" href="/tags/Cursor">Cursor (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Git" href="/tags/Git">Git (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Ubuntu" href="/tags/Ubuntu">Ubuntu (6)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Markdown" href="/tags/Markdown">Markdown (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Hugo" href="/tags/Hugo">Hugo (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Github pages" href="/tags/Github pages">Github pages (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Algorithm" href="/tags/Algorithm">Algorithm (3)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Docker" href="/tags/Docker">Docker (5)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="VPS" href="/tags/VPS">VPS (3)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Proxy" href="/tags/Proxy">Proxy (4)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="QEMU" href="/tags/QEMU">QEMU (3)</a> </div> </div> </div> </header> <main class="container p-4  pt-20 text-skin-base min-h-full pb-32 relative" id="app"> <div class="grid grid-cols-4 gap-8"> <div class="col-span-4 xl:col-span-3 space-y-4 first:space-y-2"> <button class="flex items-center text-md cursor-pointer hover:text-skin-active outline-none" style="background-color: inherit;" onclick="history.back()"> <i class="ri-arrow-left-line mr-2"></i> <span>返回</span> </button>  <div> <div> <!-- title --> <h1 class="break-all text-2xl font-bold">网络原理及 DNS 泄漏简析</h1> <div class="flex flex-wrap items-center my-2 text-skin-dodge"> <!-- date --> <div class="mr-2"><i class="ri-calendar-2-fill mr-1"></i>2024-11-03</div> <!-- draft -->  <!-- category --> <a href="/category/网络安全" class="text-wrap break-all hover:text-skin-active mr-2"><i class="ri-folder-3-line mr-1"></i>网络安全</a> <!-- tag --> <a href="/tags/Network" class="text-wrap break-all hover:text-skin-active mr-2"><i class="ri-hashtag mr-1"></i>Network</a><a href="/tags/Proxy" class="text-wrap break-all hover:text-skin-active mr-2"><i class="ri-hashtag mr-1"></i>Proxy</a> <!-- update --> <!--{--> <!--  lastModified && (--> <!--    <div class="mr-2"><i class="ri-calendar-check-fill "></i>{t('post.lastUpdated')}:{lastModified}</div>--> <!--  )--> <!--}--> <!-- minutes --> <div class="mr-2 flex items-center"><i class="ri-hourglass-fill mr-1"></i>34分钟</div>
+        <div class="mr-2 flex items-center"><i class="ri-quill-pen-line mr-1"></i>6729字</div> </div>  </div> <div class="divider-horizontal"></div> <article class="markdown-body"> <h2 id="网络代理的三种方案">网络代理的三种方案</h2>
+<ul>
+<li>系统代理：将数据交给本地 http/socks 服务</li>
+<li>TUN/TAP：使用虚拟网卡接管系统全局流量</li>
+<li>真 VPN：封装网络层数据包的真正意义上的VPN</li>
+</ul>
+<p>　　其中 TUN 模拟用的最广泛，因为 GPT、奈飞等网站会检测代理模式上网而禁止访问对应服务，TUN 模式在配置良好的情况下，可以正常访问，且 TUN 模式还可以实现软路由等透明代理的代理网络。</p>
+<h2 id="网络通信流程和代理通信流程">网络通信流程和代理通信流程</h2>
+<p>　　参考：<a href="https://www.youtube.com/watch?v=qItL005LUik">Youtube【进阶•代理模式篇】</a></p>
+<h3 id="无代理正常通信流程">无代理正常通信流程</h3>
+<p>　　正常情况下，网络通信根据 TCP/IP 四层模型，会通过 应用层->传输层->网络层->接口层，逐层往下封装并发送到互联网中。</p>
+<p>　　应用层：HTTP 等网络协议对信息的封装<br>
+传输层：TCP 协议的封装，包含通信双方的端口：<strong>源端口</strong>和<strong>目标端口</strong><br>
+网络层：IP 协议的封装，包含通信双方的<strong>源 IP 地址</strong>和<strong>目的 IP 地址</strong><br>
+接口层：物理接口，封装MAC地址，并将数据包发送出去。</p>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241103161311-cavqrmg.png" data-alt="image">​</p>
+<p>　　在正常家庭宽带网络中，都使用 IPV4 作为主要的 IP 通信地址，而 IPV4 地址有限，需要使用 NAT 技术为家庭网络中的设备分配 <code>192.168.0.0/16</code>​ 的c类私有网络地址，因此在路由器发出我们的数据流量时，会主动将其中的 <code>192.168.0.0/16</code>​ 私有地址替换为其获取的 WAN 共有地址，并发送出去。在接受公网的数据包时，也会再替换成对应的私有网络地址。这部分和代理网络没有相关性，只作了解。代理网络主要关注点在应用层到网络层。</p>
+<h3 id="代理网络通信流程">代理网络通信流程</h3>
+<h4 id="系统代理">系统代理</h4>
+<p>　　最简单，最常见的代理模式，所有的代理软件都会支持的一种模式。<br>
+其主要在应用层工作：</p>
+<ol>
+<li>设置软件为系统代理模式，并且应用本身访问网络也遵循系统代理，则该应用的网络流量会被交给代理软件。</li>
+<li>代理软件根据相应的分流规则，决定每一个连接是否需要走代理服务器。</li>
+<li>根据代理服务器的加密协议，将流量加密。代理加密（例如 Shadowsocks、V2Ray）能隐藏域名和具体内容，监控者只能看到加密流量，难以获取任何访问信息。而普通的 https 协议还是可以发现访问的网址。</li>
+<li>而代理服务器收到数据流量后，会进行解封装，和解密，然后帮助我们访问对应的网站和内容，最后再通过相同的加密方式再返回给本机。</li>
+<li>本机再解封装、解密，使得本机可以正常访问被屏蔽的网站。</li>
+</ol>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241103165345-jmwbasz.png" data-alt="image">​</p>
+<p>　　这个模式简单，但有一个问题，并不是所有软件都可以走系统代理访问。大部分软件的行为完全取决于开发者，绝大部分的软件都不会走系统代理，不会给设置系统代理的入口。而且像游戏这类走 udp 协议的流量，就无法通过 http 协议代理，且游戏一般不会添加代理功能。</p>
+<p>　　系统代理的常见用途就是看网页和聊天。还有一些设置了走代理，但实际并没有，这种情况下，就需要 TUN/TAP 模式。</p>
+<h4 id="tuntap-模式">TUN/TAP 模式</h4>
+<p>　　创建一张虚拟网卡，从网络层接管所有的流量。因为所有发往互联网的流量都必须经过网络层的封装，在这层进行拦截就能够获取所有应用产生的网络数据，这是目前主流的模式。<br>
+手机上的代理软件默认就是这种模式，所有可以实现所有软件的代理。软路由接管全家的科学上网也是同样的原理。所以 TUN/TAP 模式是应用最广泛的代理模式。</p>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241103163645-ufz4h4s.png" data-alt="image">​</p>
+<p>　　其主要在网络层和接口层工作：</p>
+<p>　　数据的封装流程和系统代理模式都一致，区别在与，网络层对 IP 协议封装时，<strong>源 IP 地址</strong>将不再是物理网卡地址，而是被封装为虚拟网卡地址。因为系统现在有两张网卡，具体发送供给哪一张，由路由表决定。<br>
+所以代理软件通过添加路由表项实现所有 IP 地址的数据都转发给虚拟网卡的功能。如下图所示：</p>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241103164942-pqzjmjx.png" data-alt="image">​</p>
+<p>　　所以，网络层现在封装的<strong>源 IP 地址</strong>就是<code>198.18.0.1</code>​，如果是 TAP 协议，还会向下封装 MAC 地址。</p>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241103165106-an8n3db.png" data-alt="image">​</p>
+<p>　　当数据来到虚拟网卡后，代理软件会直接读取数据流量，并根据分流规则，将需要加密的数据加密，继续和正常通信一样封装到接口层，且为了避免流量环回，还会自动的在网络层将源 IP 改为物理网卡地址，最后发送出去。</p>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241103165532-49w0rcf.png" data-alt="image">​</p>
+<p>　　所以 TUN 模式的主要特点，就是通过修改路由表接管所有系统流量，不支持走系统代理的软件流量，也会被 TUN 模式接管。<br>
+但软件或者游戏，可以检测到电脑是否开启虚拟网卡。为了让代理过程对电脑完全透明，可以将clash的虚拟网卡转移到路由器里。这样局域网内的设备无需运行任何代理工具，所有设备上网流量必将经过网关路由器。这就是透明代理，也是软路由的由来。</p>
+<p>　　这种虚拟网卡模式和真正的 VPN 非常接近，但并不是真正的 VPN。因为目前主流的代理网络协议（SS、Vmess、Trojan）都无法封装网络层的数据包，比如 ping 命令的 ICMP 协议流量。当我们 Ping 网站时，会直接从虚拟网卡返回，而不是真实的 ping 命令返回的数据包。<br>
+但真正的 VPN 可以代理网络层协议，可以正常 Ping。</p>
+<h4 id="真正的-vpn">真正的 VPN</h4>
+<p>　　VPN 全称 Virtual Private Network，即 虚拟专用网络或者虚拟私有网络。私有网络就是家里的局域网，没有公网 IP，无法从外网直接和你的局域网设备通信。但 VPN 可以不物理的连接私有局域网，和局域网设备通信。只有封装网络层的数据包，才能实现这个功能，实现异地组网。</p>
+<p>　　但 VPN 并不适合翻墙，因为 VPN 不会隐藏自己的流量，清晰的表明自己就是 VPN 流量，而科学上网的协议将自己隐藏起来，不能判断出究竟是什么类型的流量。</p>
+<h2 id="dns">DNS</h2>
+<p>　　Domin Name System，域名系统，用于解析域名，获取域名对应的服务器的 IP 地址。</p>
+<h3 id="dns-工作流程">DNS 工作流程</h3>
+<p>　　访问网站时，都是通过域名访问，但需要 IP 地址才能定位一个服务器。在家庭网络中，一般会由运营商分配 DNS 服务器，为网络提供 DNS 服务。当本机需要访问一个域名网站时，会构建一条 UDP <strong>明文</strong>数据包发往 DNS 服务器，这个数据包的端口一般都是 53。如果该 DNS 服务器中没有缓存对应域名的 IP 地址，则还会继续向上游 DNS 询问。最终会通过 <strong>DNS 迭代查询</strong> 找到一个权威 DNS 服务器，权威 DNS 服务器会返回域名绑定的 IP 地址和 TTL（Time To Live，标志着缓存有效时间）。每一个链路上查询过的 DNS 服务器都会缓存这个信息。最后，本机会收到该数据包，知道了 IP 地址，就可以正常访问网站了。</p>
+<h3 id="dns-泄漏">DNS 泄漏</h3>
+<p>　　而 DNS 泄漏，指的是在开启代理网络的情况下，被运营商，或者 CFW 获取到你要访问的目标网站信息。注意，一定是在开启代理的情况下。因为通常情况下，你发送 DNS 请求，运营商一定知道，并且会帮助你查询，或者是污染你的 DNS 请求，被污染的情况下，你是无法正常访问的。而开启代理后再发送<strong>目标网站</strong>的<strong>明文</strong> DNS 请求，然后又发送了一大堆加密数据，那不用想，肯定是在翻墙。所以，只有开启代理时，才会存在 DNS 泄漏。</p>
+<p>　　还有一些对地区要求高的网站，也可能会通过 DNS 查询，来判断是否是通过代理软件来访问的。还有 OpenAI 也会检测当前地区是否支持访问。当存在 DNS 泄漏时，我们就不能正常访问这些网站了。</p>
+<h3 id="检查-dns-泄漏">检查 DNS 泄漏</h3>
+<p>　　可以通过网站 <code>ipleak.net</code>​ 来查看自己当前的代理网络是否存在 DNS 泄漏。该网站的检测原理是：随机构建域名，并不断的发起随机域名的 DNS 请求。权威 DNS 服务器在受到 DNS 请求时，会记录下对应的上游 DNS 的 IP 地址，并且可以判断 DNS 上游服务器的所属地区，然后发送回该网站。该网站就能够知道你所发起的 DNS 请求，都经过了哪些区域的上游服务器。</p>
+<p>　　当你没有开启代理时，这个网站返回中国的 DNS 服务器，证明这些服务器在帮助你进行 DNS 解析。如果还配置了其他地区的 DNS，则还可能出现一些少数其他地区的服务器。并不代表 DNS 泄漏或者没有泄漏。</p>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241103205923-z9p7bbk.png" data-alt="image">​</p>
+<p>　　只有当开启代理后，流量被发送到代理软件，此时存在两种情况：1. 不发起 DNS 请求就能判断走代理还是直连。2. 发起 DNS 请求后，才能知道是否走代理。<br>
+第 1 种情况基本不存在 DNS 泄漏。而第 2 种大概率存在 DNS 泄漏。第 2 种，即便手动将 DNS 配置为国外的 DNS 服务器，也存在泄漏，因为 DNS 是明文的。这种情况下，是查不到其他的国内 DNS 服务器的，因为指定了国外 DNS 服务器，所以还会迷惑你，以为没有发生 DNS 泄漏。<br>
+只有使用 DoH 或者 DoT 进行加密，或者代理客户端加密进行远程 DNS，发送的 DNS 才不是明文，不会被其他服务器看到。但这会增加延迟。所以大部分情况是不加密 DNS 的，这回造成运营商或者中间任意一台路由器都知道你的意图是访问被墙网站。</p>
+<p>　　既然 DNS 泄漏是在开启代理后，发送了目标网站的 DNS 请求造成的。那么只要代理时，不发送这类 DNS 请求，就不会造成泄漏了。这就需要对 DNS 分流规则设置的非常合理才行。</p>
+<h3 id="解决-dns-泄漏">解决 DNS 泄漏</h3>
+<p>　　目前 TUN 模式是比较适合科学上网的，但会出现一些网站无法上网的情况，这一般是由于 DNS 设置不当造成的。DNS 负责将域名解析成 IP，但在科学上网中，要实现分流，让 DNS 这个原本简单的协议在代理应用过程中变得非常复杂。<br>
+下面先简要介绍 Clash 的代理分流过程，以及发起 DNS 请求的原因。</p>
+<h4 id="clash-系统代理流程">Clash 系统代理流程</h4>
+<p>　　Clash 的分流是基于规则匹配的，详情请阅读 <a href="https://wiki.metacubex.one/config/">clash 官方文档</a> 。一般来说规则文件都按照下面的形式组织：</p>
+<ul>
+<li>
+<p>port：监听端口</p>
+</li>
+<li>
+<p>proxies：出站节点，也就是代理服务器</p>
+</li>
+<li>
+<p>proxy-groups：节点组，每个节点组可以有多个节点或者策略组，根据 type 选择默认节点。</p>
+</li>
+<li>
+<p>rules：分流规则，基于域名或者 IP 匹配。规则将按照从上到下的顺序匹配，列表顶部的规则优先级高于其底下的规则。部分规则如下：</p>
+<p><a href="https://wiki.metacubex.one/config/rules/#domain" title="Permanent link">DOMAIN</a>：匹配完整域名；</p>
+<p><a href="https://wiki.metacubex.one/config/rules/#domain-suffix" title="Permanent link">DOMAIN-SUFFIX</a>：匹配域名后缀；例：<code>google.com</code>​匹配<code>www.google.com</code>​/<code>mail.google.com</code>​和<code>google.com</code>​,但不匹配<code>content-google.com</code>​</p>
+<p><a href="https://wiki.metacubex.one/config/rules/#domain-keyword" title="Permanent link">DOMAIN-KEYWORD</a>：使用域名关键字匹配</p>
+<p><a href="https://wiki.metacubex.one/config/rules/#ip-cidr-ip-cidr6" title="Permanent link">IP-CIDR &#x26; IP-CIDR6</a>：匹配 IP 地址范围，<code>IP-CIDR</code>​和<code>IP-CIDR6</code>​效果是一样的，<code>IP-CIDR6</code>​为是 IPV6 地址</p>
+<p><a href="https://wiki.metacubex.one/config/rules/#geoip" title="Permanent link">GEOIP</a>：匹配 IP 所属国家代码</p>
+<p><a href="https://wiki.metacubex.one/config/rules/#src-ip-cidr" title="Permanent link">SRC-IP-CIDR</a>：匹配来源 IP 地址范围</p>
+<p><a href="https://wiki.metacubex.one/config/rules/#process-name" title="Permanent link">PROCESS-NAME</a>：使用进程匹配，在<code>Android</code>​平台可以匹配包名</p>
+<p><a href="https://wiki.metacubex.one/config/rules/#match" title="Permanent link">MATCH</a>：匹配所有请求，无需条件</p>
+</li>
+</ul>
+<p>　　根据上述规则，当我们使用浏览器通过系统代理访问 <code>www.google.com</code>​ 时，源 IP 地址为 <code>127.0.0.1</code>​，域名为 <code>www.google.com</code>​。则从上倒下依次根据规则进行判断：</p>
+<p>　　​<code>DOMIN,google.com,节点组1</code>​：不匹配，<code>www.google.com</code>​不是<code>google.com</code>​</p>
+<p>　　​<code>DOMIN-SUFFIX,youtube.com,节点组1</code>​：不匹配，不是<code>youtube.com</code>​结尾</p>
+<p>　　​<code>DOMIN-KEYWORD,youtube,节点组1</code>​：不匹配</p>
+<p>　　​<code>DOMIN,ad.com,REJECT</code>​：不匹配，ad是广告，直接拒绝回应。</p>
+<p>　　​<code>SRC-IP-CIDR,192.168.1.201/32,DIRECT</code>​ ：源 IP 地址为 <code>127.0.0.1</code>​，不匹配</p>
+<p>　　​<code>IP-CIDR,127.0.0.0/8,DIRECT,no-resolve</code>​：这里<strong>特殊</strong>，这里匹配的是 IP 网段，当访问的是 <code>127.0.0.0/8</code>​ 网段，就走直连。但我们匹配的是 <code>www.google.com</code>​ 域名，无法直接和 IP 进行匹配，因为需要先获取 IP 地址，才能进行匹配。但这里又加了 <code>no-resolve</code>​，表示不进行 DNS 解析。因此这里直接跳过。</p>
+<p>　　​<code>IP-CIDR6,2620::7/32,节点组1,no-resolve</code>​：和上一条一样。也跳过</p>
+<p>　　​<code>GEOIP,CN,DIRECT</code>​：<code>GEOIP</code>​ 是一个常见 IP 归属地分类数据库，如果是国内的 IP，就直连。由于后面没有加 <code>no-resolve</code>​，所以要将域名解析为 IP 地址。而这里没有配置内置 DNS 模块，因此，采用本地 DNS 解析。这时，构建的就是明文的 DNS 解析请求，就会<strong>造成 DNS 泄漏</strong>。请求一个被墙的域名，返回的大概率是一条非国内的被污染的 IP。这时也不匹配这条规则。</p>
+<p>　　​<code>DST-PORT,80,DIRECT</code>​ 和 <code>SRC-PORT,7777,DIRECT</code>​ 对目的和源端口进行匹配。这里也不匹配。</p>
+<p>　　​<code>PROCESS-NAME,curl,节点组2</code>​：匹配进程，如果是 curl 发起的，则交给节点组2。也不匹配。</p>
+<p>　　因为所有规则都不匹配，所以 Clash 还有一个兜底的规则，所有不匹配的规则都交给 <code>MATCH</code>​ 处理。所以这一条访问 <code>www.google.com</code>​ 的请求，会被交给节点组1，也就是香港节点。这里需要注意，刚刚发起的 DNS 请求获取的 IP 只是用于进行规则匹配，不会用于发给香港节点。香港节点收到的还是域名，因此，香港节点收到后还是会发起 DNS 请求获取到正确的  IP。</p>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241103214619-nsqy0oz.png" data-alt="image">​</p>
+<h5 id="解决方案">解决方案</h5>
+<p>　　<strong>下面两种方案仅适用于系统代理模式下。</strong></p>
+<h6 id="白名单模式">白名单模式</h6>
+<p>　　刚刚的流程中，发生 DNS 泄漏是因为基于 IP 的规则匹配，没有加 <code>no-resolve</code>​ 而发起了 DNS 请求。那么我们就给所有基于 IP 的规则匹配都加上 <code>no-resolve</code>​。<br>
+但这样会导致国内网站域名跳过 <code>GEOIP,CN,DIRECT,no-resolve</code>​ 规则，而走代理节点。这肯定是不对的。所以不仅需要给所有基于 IP 的规则匹配都加上 <code>no-resolve</code>​，还需要在 <code>GEOIP</code>​ 之前加上国内域名走直连的规则。<br>
+这样大部分国内的网站都能正常走直连，但还是有一些小众的国内网站不会走直连，需要手动添加。这样的效率最高，实际上就是 v2rayN 的<strong>绕过大陆模式</strong>。</p>
+<p>　　在 v2ray 中需要配置：AsIs 匹配模式 + 绕过大陆规则。这种完全可以防止 DNS 泄漏，因为 AsIs 只使用域名匹配，当碰到 GEOIP 这种 IP 规则，直接跳过，不发起 DNS 请求。绕过大陆规则就是所有大陆域名放在前面，直接走直连。而国外域名或者没有在大陆规则中的，就全部走代理。</p>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241104115737-4tlnau5.png" data-alt="image">​</p>
+<h6 id="黑名单模式">黑名单模式</h6>
+<p>　　我们还可以把国外的域名放在最开始解析，以匹配代理节点，这样就不会到后续的 <code>GEOIP</code>​ 也就不会造成 DNS 泄漏了。</p>
+<p>　　不论黑名单还是白名单，在使用 <code>ipleak.net</code>​ 时，由于是随机域名，最终肯定会进行 <code>GEOIP</code>​ 匹配，因此会发起 DNS 请求，这种情况下，就会检测到国内的 DNS 提供商。不过我们需要访问的国外域名不会出现 DNS 泄漏，所以这样的情况也不能完全算是 DNS 泄漏。</p>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241103230958-l3curan.png" data-alt="image">​</p>
+<p>　　在 v2ray 中需要配置：IPIfNoMatch 匹配模式 + 黑名单。这样当黑名单中的国外域名出现时，会走代理。而国内以及小众国外域名还是会 DNS 请求。</p>
+<h6 id="总结">总结</h6>
+<p>　　在系统代理模式下，上述两种方式已经足够使用，目标网站的 DNS 是不会泄漏的。对于通常意义上的使用场景来说已经够用。但之前也说过，TUN，软路由这种代理模式应用的最广泛，针对这些场景下的 DNS 泄漏，解决就麻烦一些。</p>
+<h4 id="tun软路由模式下的代理流程">TUN、软路由模式下的代理流程</h4>
+<p>　　和系统代理模式的主要区别，是配置了 DNS 模块，接管了系统 DNS 解析模块。下面是 Clash.Meta 的 DNS 工作流程，忽略了 Clash 内部的 DNS 映射处理。</p>
+<p>　　参考：<a href="https://wiki.metacubex.one/config/dns/diagram/">Clash 官方 DNS 解析流程</a></p>
+<pre class="mermaid">flowchart TD
+  Start[客户端发起请求] --> rule[匹配规则]
+  rule --> Domain[匹配到基于域名的规则]
+  rule --> IP[匹配到基于 IP 的规则]
+
+  Domain --> |域名匹配到直连规则|DNS
+  IP --> DNS[通过 Clash DNS 解析域名]
+
+  Domain --> |域名匹配到代理规则|Remote[通过代理服务器解析域名并建立连接]
+
+  Cache --> |Redir-host/FakeIP-Direct 未命中|NS[匹配 nameserver-policy 并查询 ]
+  Cache --> |Cache 命中|Get
+  Cache --> |FakeIP 未命中,代理域名|Remote
+
+  NS --> |匹配成功| Get[将查询到的 IP 用于匹配 IP 规则]
+  NS --> |没匹配到| NF[nameserver/fallback 并发查询]
+
+  NF --> Get[查询得到 IP]
+  Get --> |缓存 DNS 结果|Cache[(Cache)]
+  Get --> S[通过 IP 直接/通过代理建立连接]
+
+  DNS --> Redir-host/FakeIP
+  Redir-host/FakeIP --> |查询 DNS 缓存|Cache</pre>
+<p>　　Clash.Meta 支持两种 DNS 配置模式：redir-host 和 fake-ip。redir-host 模式是最初大家使用的一种模式，和 fake-ip 的区别在于 redir-host 模式必须返回一个真实的 IP 地址，因此必须要进行 DNS 查询。而 fake-ip 返回的都是私有的 fake 地址，也就是假地址，因此最开始时不需要 DNS 查询。</p>
+<p>　　下面根据上述流程图，简单介绍 Clash 中的 TUN 模式的代理行为。</p>
+<p>　　和系统代理模式相比，TUN 多了一个 DNS 模块的配置。需要配置 DNS 模块的模式 <code>enhanced-mode</code>​ 和域名服务器 <code>nameserver</code>​。<br>
+在网络通过过程中，应用程序，例如浏览器，发起网站访问时首先发起 DNS 请求，获取 IP 地址。Clash 将劫持 DNS 请求，并通过配置的 DNS 模块来处理。下面分别简化介绍 redis-host 和 fake-ip 模式下的 DNS 处理过程。和 Clash.Meta 中的过程稍有不一致，但整体一致。</p>
+<h5 id="解决方案1redis-host">解决方案1：redis-host</h5>
+<p>　　以下图中的配置为例，浏览器访问域名 <code>google.com</code>​：</p>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241103231237-ed07hdk.png" data-alt="image">​</p>
+<p>　　在 redis-host 模式中，要求必须返回一个真实 IP。所以会同时向 <code>nameserver</code>​ 中定义的三个域名服务器发起 DNS 请求，以最快返回的 DNS 响应为准，这里大概率会得到一个被污染的 IP，假设是 <code>5.5.5.5</code>​。Clash 将保存域名 <code>google.com</code>​ 和 IP <code>5.5.5.5</code>​ 的映射的关系。<br>
+浏览器会使用这个 IP 发起 http 请求。http 请求会再次被 Clash 捕获，并根据映射表判断是想访问 <code>google.com</code>​。此时 Clash 就根据 <code>rules</code>​ 路由规则进行域名匹配。<br>
+​<code>google.com</code>​直接匹配第一条规则，则会被交给节点组1 的香港节点处理。这里要注意，交给节点的仍然是<code>google.com</code>​域名，香港节点收到后，还会再次发起 DNS 请求来获取真正的 IP 进行访问。<br>
+所以，redis-host 模式由于必须返回真实 IP，就必然发起 DNS 请求，<strong>必然产生 DNS 泄漏</strong>。</p>
+<p>　　这里还有另外一个问题：由于本地发起 DNS 请求会得到被污染的 IP 地址，很有可能会造成两个不同的域名被污染到同一个地址的情况，或者两个不同的域名就是被搭建在同一个服务器上。此时 Clash 就无法确认访问的是哪一个域名了。Clash 遇到这种情况将直接发送污染 IP，而不进行远程 DNS。远程节点服务器拿到数据包后，直接访问被污染 IP，肯定不能正常访问，还有可能出现访问 A 网站，而返回的是 B 网站的现象，并由于证书不一致，浏览器发出警告。之前就遇到过访问 google，返回的却是 facebook 的现象。</p>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241104100429-86in9ld.png" data-alt="image">​</p>
+<p>　　解决这个问题，有两种方案：</p>
+<ol>
+<li>
+<p>使用域名嗅探功能，直接 http 协议中找出需要访问的域名。这样即便映射表中有相同的 IP，也能找出需要访问的具体网站域名，从而使用远程 DNS 解析。</p>
+</li>
+<li>
+<p>在 DNS 配置中添加一个 <code>fallback</code>​ 配置，存放不会被污染的 DNS 服务器，一般是经过加密的 DoT 或者 DoH 服务器。在最初发起 DNS 请求时，同时向 <code>nameserver</code>​ 和 <code>fallback</code>​ 中的 DNS 服务器发起 DNS 请求。如果 <code>nameserver</code>​ 上游 DNS 返回的不是国内  IP，则直接使用 <code>fallback</code>​ 中返回的 IP 地址，确保国外 IP 不被污染。这里有一个注意点：向 <code>fallback</code>​ 发起 DNS 查询的主机的地理位置，将影响 DNS 返回的 IP。DNS 会选择一个离发起 DNS 主机最近位置的服务器 IP。在 clash 中即使是 <code>fallback</code>​ 也通过本机发起 DNS 请求，这就导致返回的 IP 并不是离代理节点服务器最近的位置，造成速度负优化。但 clash.meta 中已经修改。</p>
+<p>但国内访问国外 DoH/DoT 体验很差，间歇性被墙，且需要握手、加密速度也比较慢。</p>
+</li>
+</ol>
+<p>　　由于 redis-host 在使用过程中，接连出现的问题，clash 在一次更新中彻底除去 redis-host 模式，转而只支持 fake-ip。而 clash.meta 通过加入流量嗅探解决了 redis-host 的 DNS 污染问题。</p>
+<h5 id="解决方案2fake-ip">解决方案2：fake-ip</h5>
+<p>　　IOS 端的代理软件都是用的 fake-ip 模式，v2ray 也有类似功能叫作 fake DNS。</p>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241104103249-bgpa1yt.png" data-alt="image">​</p>
+<p>　　以下图中的配置为例，浏览器访问域名 <code>google.com</code>​：</p>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241104103406-z505nye.png" data-alt="image">​</p>
+<p>　　在 fake-ip 模式中，所有应用的 DNS 请求全部返回一个虚拟的 IP，也就是 <code>fake-ip-range</code>​ 中的私有地址中分配的一个。假设返回的是 <code>198.18.0.3</code>​。Clash 将保存域名 <code>google.com</code>​ 和 IP <code>198.18.0.3</code>​ 的映射的关系。<br>
+浏览器会使用这个 IP 发起 http 请求。http 请求会再次被 Clash 捕获，并根据映射表判断是想访问 <code>google.com</code>​。此时 Clash 就根据 <code>rules</code>​ 路由规则进行域名匹配。<br>
+​<code>google.com</code>​直接匹配第一条规则，则会被交给节点组1 的香港节点处理。这里要注意，交给节点的仍然是<code>google.com</code>​域名，香港节点收到后，还会再次发起 DNS 请求来获取真正的 IP 进行访问。</p>
+<p>　　所以 fake-ip 模式，本地并不需要进行 DNS 解析，也就不存在 DNS 泄漏。还解决了 DNS 污染中，多域名指向统一 IP 的问题，因为每一个 fake ip 都由 clash 控制。<br>
+但这不意味着 fake-ip 永远不会发起 DNS 查询。因为在 rules 的路由匹配规则中，一定会有 GEOIP 规则，当我们访问 <code>ipleak.net</code>​ 时，一定会走到这里，此时仍然会向 <code>nameserver</code>​ 和 <code>fallback</code>​ 中的 DNS 服务器发起 DNS 请求。所以在这里，<code>ipleak.net</code>​ 仍然会返回多家 DNS  提供商。<br>
+这就和系统代理模式下的 DNS 泄漏一样，关键目标网站并没有泄漏。</p>
+<p>　　fake-ip 虽然可以一定程度上解决 DNS 泄露和 DNS 污染，但是也有自己的问题。比如：当已经访问了网站 <code>www.baidu.com</code>​ 并缓存了假 IP，此时 clash 异常退出，电脑仍然缓存的是假 IP，此时就无法访问 <code>www.baidu.com</code>​。即便 clash 将 DNS 响应的缓存 TTL 设置为 1 秒，但应用程序并不一定会遵循 DNS 响应的 TTL 设置，可能会延长缓存时间来防止频繁 DNS  查询。还有一些程序会开启 DNS 重绑保护，当发现 DNS 获取的是一个私有 IP，或认为出现 DNS 劫持而被丢弃。就比如 windows 系统使用 fake-ip 出现联网图标显示没网的情况。在 Linux 上也同理。解决方法是将 windows 的 test 联网的网址，放在 <code>fake-ip-filter</code>​ 中，放在其中的域名不会获取 fake-ip 而是会发起 DNS 请求，获取真实的 IP。相当于回退到 redir-host 模式。也可以通过 <code>"+.*"</code>​ 通配符将所有的网站添加到 <code>fake-ip-filter</code>​ 回退，此时就处于 redir-host 模式了。<br>
+还有 Ping 命令失效的问题，因为都是 fake-ip 所以 ping 命令全部都由 clash 的虚拟网卡返回。</p>
+<p>　　Windows 测试是否联网的网址为：<a href="http://www.msftconnecttest.com">www.msftconnecttest.com</a> 和 <a href="http://www.msftncsi.com%E3%80%82%E5%8F%82%E8%80%83%EF%BC%9A%5Bgithub.com/Loyalsoldier/v2ray-rules-dat/issues/136">www.msftncsi.com。参考：[github.com/Loyalsoldier/v2ray-rules-dat/issues/136</a>](<a href="https://github.com/Loyalsoldier/v2ray-rules-dat/issues/136">https://github.com/Loyalsoldier/v2ray-rules-dat/issues/136</a>)</p>
+<p>　　在 Manjaro 中，测试是否联网的网址如下：</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.r9qfg.css"><script type="module" src="/_astro/ec.dy9ns.js"></script><figure class="frame"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><div class="gutter"><div class="ln">1</div></div><div class="code"><span style="--0:#E1E4E8;--1:#24292E">sudo cat </span><span style="--0:#F97583;--1:#BF3441">/</span><span style="--0:#E1E4E8;--1:#24292E">lib</span><span style="--0:#F97583;--1:#BF3441">/</span><span style="--0:#E1E4E8;--1:#24292E">NetworkManager</span><span style="--0:#F97583;--1:#BF3441">/</span><span style="--0:#E1E4E8;--1:#24292E">conf.d</span><span style="--0:#F97583;--1:#BF3441">/</span><span style="--0:#79B8FF;--1:#005CC5">20</span><span style="--0:#F97583;--1:#BF3441">-</span><span style="--0:#E1E4E8;--1:#24292E">connectivity.conf                                                                                                  ✔</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">2</div></div><div class="code"><span style="--0:#E1E4E8;--1:#24292E">[connectivity]</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">3</div></div><div class="code"><span style="--0:#E1E4E8;--1:#24292E">uri</span><span style="--0:#F97583;--1:#BF3441">=</span><span style="--0:#E1E4E8;--1:#24292E">http:</span><span style="--0:#99A0A6;--1:#616972">//ping.manjaro.org/check_network_status.txt</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="sudo cat /lib/NetworkManager/conf.d/20-connectivity.conf                                                                                                  ✔[connectivity]uri=http://ping.manjaro.org/check_network_status.txt"><div></div></button></div></figure></div>
+<p>　　另外，udp 在一定场景下，必须使用真实的 IP，所以 fake-ip 下 udp 流量都会发起 DNS 请求。比如基于 UDP 的 QUIC 协议，也就是 HTTP3。可以在浏览器中，禁用该功能。</p>
+<p>　　chrome://flags/#enable-quic</p>
+<p>​<img src="/spinner.gif" alt="default" data-src="/images/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A%20DNS%20%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/image-20241104112934-yobdbj0.png" data-alt="image">​</p>
+<h2 id="总结-1">总结</h2>
+<p>　　通过解析代理网络的 DNS 请求行为以及代理网络的通信流程，结合已有的 clash 模式，可以正确的配置 DNS 模块来防止 DNS 泄漏或者污染。</p>
+<p>　　DNS 污染导致无法正常访问网站，DNS 泄漏导致一些严格地区的网站无法访问。</p>
+<p>　　通常系统代理模式下的 DNS 泄漏容易解决，使用白名单或者黑名单加上对应的路由匹配模式，就可以解决。</p>
+<p>　　而对于 TUN 模式下，或者软路由，这种接管了系统 DNS 的模式，就需要手动配置 DNS 模块，并根据 代理模式（redir-host 或者 fake-ip）来决定是否开启流量嗅探，以及是否配置 DNS代理。</p>
+<p>　　redir-host + 流量嗅探 + DNS 代理可以完美解决 DNS 泄漏，但是速度会慢。</p>
+<p>　　fake-ip + 合理路由规则 一定程度上解决 DNS 泄漏，但是速度较快。<br>
+fake-ip 也可以使用 DNS 代理解决 DNS 泄漏。相比于 redir-host 减少了一次 DNS 请求，因此也还是更快。<br>
+但 fake-ip 由于使用的是虚拟 IP，在使用 ping 命令，或者一些检测 DNS 劫持的软件就不能使用了。</p>
+<p>　　‍</p>
+<p>　　参考：<a href="https://youtu.be/50iVDmqzDW8?si=mL9QLqKjFDuexG3G">【进阶•DNS系列视频】</a></p>
+<p>　　‍</p>
+<p>　　‍</p> </article> <div class="divider-horizontal"></div> <div class="h-8 text-skin-base"> <a class="truncate  w-auto max-w-[40%] float-left" href="/blog/time-同步" title="Time 同步"> <i class="ri-arrow-left-s-fill"></i> Time 同步 </a> <div class="flex item-center float-right w-auto max-w-[40%] text-right"> <a class="truncate " href="/blog/qemu/qemu开发环境搭建" title="QEMU开发环境搭建"> QEMU开发环境搭建 </a> <i class="ri-arrow-right-s-fill float-right"></i> </div> </div> <div class="border-l-4 my-4 p-4 border-l-skin-base bg-skin-card break-all"> <div>本文标题：网络原理及 DNS 泄漏简析</div> <div>文章作者：Lyndra</div> <div>发布时间：2024-11-03</div> <div> 原始链接：<a href="https://www.hysling.top/blog/proxy/网络原理及-dns-泄漏简析" class="hover:text-skin-active">https://www.hysling.top/blog/proxy/网络原理及-dns-泄漏简析</a> </div> </div>  </div>  <div class="giscus"></div> <script src="https://giscus.app/client.js" data-repo="codetang-2417/codetang-2417.github.io" data-repo-id="R_kgDOMyu4sg" data-category="Announcements" data-category-id="DIC_kwDOMyu4ss4CiiW6" data-mapping="title" data-strict="light" data-reactions-enabled="dark" data-emit-metadata="1" data-input-position="0" data-theme="light" data-lang="zh-CN" crossorigin="anonymous"></script> </div> <div class="hidden xl:block col-span-1 relative"> <div class="shadow-lg rounded-lg h-64 w-auto flex flex-col items-center justify-center bg-skin-card p-2"> <img class="avatar mb-4" src="/avatar.svg" alt="avatar"> <div class="mb-2 text-center">本来无一物，何处惹尘埃</div> <div class="flex items-center justify-center flex-wrap"> <a title="github" href="https://github.com/codetang-2417" target="_blank"> <i class="ri-github-fill text-2xl mr-2 cursor-pointer"></i> </a><a title="rss" href target="_blank"> <i class="ri-rss-fill text-2xl mr-2 cursor-pointer"></i> </a> </div> </div> <div id="toc" class="shadow-lg rounded-lg my-4 py-2 px-2 bg-skin-card sticky top-20" data-astro-cid-6t6zfk7k> <div class="aside-widget" data-astro-cid-6t6zfk7k> <i class="ri-list-check menu-icon" data-astro-cid-6t6zfk7k></i> 文章目录 </div> <div class="overflow-auto" data-astro-cid-6t6zfk7k> <div class="toc-container" data-astro-cid-6t6zfk7k></div> </div> </div>  <script type="module" src="/_astro/Toc.astro_astro_type_script_index_0_lang.R6DO86cs.js"></script> </div> <button type="button" id="scrollToTopBtn" class="header-btn fixed bottom-4 right-2 hidden" title="scroll to top"> <i class="ri-arrow-up-line"></i> </button> <script type="module">let o=document.getElementById("scrollToTopBtn");window.addEventListener("scroll",function(){window.scrollY>200?o.style.display="block":o.style.display="none"});o.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});</script> </div> <div class="h-16 container p-1 absolute left-0 bottom-0"> <div class="flex items-center justify-center text-skin-base"> <span id="busuanzi_container_site_pv"> 总访问量<span id="busuanzi_value_site_pv"></span>次 </span> <div class="divider-vertical"></div> <span id="busuanzi_container_site_uv"> 总访客数<span id="busuanzi_value_site_uv"></span>人次 </span> </div> <div class="flex items-center flex-col flex-wrap justify-center mb-4 text-skin-base first:mb-0 sm:flex-row"> <div> <span class="cursor-default">Copyright</span> <i class="ri-copyright-line align-middle"></i> <span class="align-middle">2025</span> </div>  <div class="divider-vertical"></div> <a href="/sitemap-0.xml">站点地图</a> </div> </div> </main> <script type="module" src="/_astro/BlogPost.astro_astro_type_script_index_0_lang.C_bBgou1.js"></script></body></html>

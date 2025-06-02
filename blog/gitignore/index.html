@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="zh-cn"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.png"><meta name="generator" content="Astro v5.7.13"><!-- Canonical URL --><link rel="canonical" href="https://www.hysling.top/blog/gitignore"><link rel="alternate" type="application/rss+xml" title="Lyndra's Blog" href="/rss.xml"><!-- Primary Meta Tags --><meta name="title" content="Gitignore - Lyndra's Blog"><meta name="description" content="素处以默"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://www.hysling.top/blog/gitignore"><meta property="og:title" content="Gitignore - Lyndra's Blog"><meta property="og:description" content="素处以默"><meta property="og:image" content="https://www.hysling.top/blog/gitignore"><!-- <meta property="og:image:alt" content={site.description}/> --><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://www.hysling.top/blog/gitignore"><meta property="twitter:title" content="Gitignore - Lyndra's Blog"><meta property="twitter:description" content="素处以默"><meta property="twitter:image" content="https://www.hysling.top/blog/gitignore"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="sitemap" href="/sitemap-0.xml"><title>Gitignore - Lyndra&#39;s Blog</title><script src="/toggle-theme.js"></script><script async type="text/javascript" src="/load-mathjax.js"></script><script async type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><link rel="stylesheet" href="/_astro/WalineComment.XaQ6XQsx.css">
+<link rel="stylesheet" href="/_astro/BlogPost.BUYUBhIy.css">
+<link rel="stylesheet" href="/_astro/about.gIe6_up2.css">
+<link rel="stylesheet" href="/_astro/_slug_.DYqrg3Zi.css">
+<style>#donate-item-img{filter:grayscale(1)}#donate-item-img:hover{filter:blur(0px);cursor:pointer}.esa-sponsor{position:relative;width:100%;margin:40px 0}.esa-sponsor .qrshow{position:absolute;width:200px;height:200px;cursor:pointer;left:calc(50% - 100px);top:-170px;z-index:999;display:none;box-shadow:0 1px 15px #1b1f2326,0 0 1px #6a737d59}
+.post-title[data-astro-cid-6t6zfk7k]:hover{outline:0;color:#cc7a00;text-shadow:1px 1px 1px #ffd147}.toc_container[data-astro-cid-6t6zfk7k]{overflow-y:scroll;scrollbar-width:none;-ms-overflow-style:none}.toc_container[data-astro-cid-6t6zfk7k]::-webkit-scrollbar{width:0;height:0}.toc_container[data-astro-cid-6t6zfk7k] a[data-astro-cid-6t6zfk7k]{text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+</style></head><body class="bg-skin-secondary"> <header class="fixed top-0 w-full bg-skin-fill text-skin-base z-10"> <div class="flex items-center justify-between container"> <div class="block xl:hidden"> <button type="button" id="menu-icon" class="header-btn" title="Menu"> <i class="ri-menu-fill"></i> </button> <button type="button" id="menu-icon-close" class="header-btn hidden" title="Menu"> <i class="ri-close-fill"></i> </button> <script type="module">let n=document.getElementById("menu-icon"),t=document.getElementById("menu-icon-close"),l=document.getElementById("mobile-menu"),e=document.getElementById("aside-btn"),i=document.getElementById("aside-close-btn"),s=document.getElementById("personal-info");n.addEventListener("click",()=>{e&&e.classList.contains("hidden")&&d([e,i,s]),d([n,t,l])});t.addEventListener("click",()=>{d([n,t,l])});function d(o){o.forEach(c=>{c.classList.toggle("hidden")})}</script> </div> <a class="text-2xl p-4" href="/">Lyndra&#39;s Blog</a> <div class="flex items-center"> <div class="hidden xl:block"> <div class="flex items-center space-x-5 pr-4"> <div class="box relative h-10 w-auto flex items-center" data-astro-cid-eimmu3lg> <a href="/blog/1" target="_self" class="header-link-active hover:header-link-hover" data-astro-cid-eimmu3lg> <i class="ri-draft-line" data-astro-cid-eimmu3lg></i> 博客  </a>  </div> <div class="box relative h-10 w-auto flex items-center" data-astro-cid-eimmu3lg> <a href="/feed/1" target="_self" class="hover:header-link-hover" data-astro-cid-eimmu3lg> <i class="ri-lightbulb-flash-line" data-astro-cid-eimmu3lg></i> 动态  </a>  </div> <div class="box relative h-10 w-auto flex items-center" data-astro-cid-eimmu3lg> <a href="/archive/1" target="_self" class="hover:header-link-hover" data-astro-cid-eimmu3lg> <i class="ri-archive-line" data-astro-cid-eimmu3lg></i> 归档  </a>  </div> <div class="box relative h-10 w-auto flex items-center" data-astro-cid-eimmu3lg> <a href="/message" target="_self" class="hover:header-link-hover" data-astro-cid-eimmu3lg> <i class="ri-chat-1-line" data-astro-cid-eimmu3lg></i> 留言  </a>  </div> <div class="box relative h-10 w-auto flex items-center" data-astro-cid-eimmu3lg> <a href="/search" target="_self" class="hover:header-link-hover" data-astro-cid-eimmu3lg> <i class="ri-search-line" data-astro-cid-eimmu3lg></i> 搜索  </a>  </div> <div class="box relative h-10 w-auto flex items-center" data-astro-cid-eimmu3lg> <a href="javascript:void(0);" target="_self" class="hover:header-link-hover" data-astro-cid-eimmu3lg> <i class="ri-more-fill" data-astro-cid-eimmu3lg></i> 更多 <i class="ri-arrow-down-s-line" data-astro-cid-eimmu3lg></i> </a> <div class="dropdown cursor-pointer border rounded bg-skin-fill p-4" data-astro-cid-eimmu3lg> <ul class="space-y-4 w-28" data-astro-cid-eimmu3lg> <li class="text-center hover:text-skin-active select-none" data-astro-cid-eimmu3lg> <i class="ri-information-line" data-astro-cid-eimmu3lg></i> <a target="_self" href="/about" data-astro-cid-eimmu3lg>关于本站</a> </li><li class="text-center hover:text-skin-active select-none" data-astro-cid-eimmu3lg> <i class="ri-user-5-line" data-astro-cid-eimmu3lg></i> <a target="_self" href="/friends" data-astro-cid-eimmu3lg>友情链接</a> </li> </ul> </div> </div>  </div> </div> <button type="button" id="theme-btn" class="header-btn" title="Toggles light & dark" aria-label="auto" aria-live="polite"> <i id="moon-icon" class="ri-sun-line"></i> <i id="sun-icon" class="ri-moon-line"></i> </button> <div class="block xl:hidden"> <button type="button" id="aside-btn" class="header-btn" title="Open Aside Bar" aria-label="auto" aria-live="polite"> <i class="ri-user-line"></i> </button> <button type="button" id="aside-close-btn" class="header-btn hidden" title="Close Aside Bar" aria-label="auto" aria-live="polite"> <i class="ri-close-fill"></i> </button> <div id="blog-aside" class="absolute top-16 bg-skin-fill right-0 blog-aside hidden"></div> <script type="module">let n=document.getElementById("aside-btn"),t=document.getElementById("aside-close-btn"),e=document.getElementById("menu-icon"),i=document.getElementById("menu-icon-close"),s=document.getElementById("mobile-menu"),l=document.getElementById("personal-info");n.addEventListener("click",()=>{e&&e.classList.contains("hidden")&&d([e,i,s]),d([n,t,l])});t.addEventListener("click",()=>{d([t,l,n])});function d(o){o.forEach(c=>{c.classList.toggle("hidden")})}</script> </div> </div> </div> <div id="mobile-menu" class="hidden text-center overflow-y-auto pb-8" style="height: calc(100vh - 64px)"> <div class="py-2"> <a class=" hover:text-skin-active" href="/blog/1"> <i class="ri-draft-line"></i> <span>博客</span> </a>  <div class="space-y-4 text-sm">  </div> </div><div class="py-2"> <a class=" hover:text-skin-active" href="/feed/1"> <i class="ri-lightbulb-flash-line"></i> <span>动态</span> </a>  <div class="space-y-4 text-sm">  </div> </div><div class="py-2"> <a class=" hover:text-skin-active" href="/archive/1"> <i class="ri-archive-line"></i> <span>归档</span> </a>  <div class="space-y-4 text-sm">  </div> </div><div class="py-2"> <a class=" hover:text-skin-active" href="/message"> <i class="ri-chat-1-line"></i> <span>留言</span> </a>  <div class="space-y-4 text-sm">  </div> </div><div class="py-2"> <a class=" hover:text-skin-active" href="/search"> <i class="ri-search-line"></i> <span>搜索</span> </a>  <div class="space-y-4 text-sm">  </div> </div><div class="py-2"> <a class=" hover:text-skin-active" href="javascript:void(0);"> <i class="ri-more-fill"></i> <span>更多</span> </a> <div class="divider-horizontal"></div> <div class="space-y-4 text-sm"> <a class="block hover:text-skin-active" href="/about"> <i class="ri-information-line"></i> <span>关于本站</span> </a><a class="block hover:text-skin-active" href="/friends"> <i class="ri-user-5-line"></i> <span>友情链接</span> </a> </div> </div> </div> <div id="personal-info" class="hidden break-all overflow-y-auto pb-8" style="height: calc(100vh - 64px)"> <img class="avatar my-4 mx-auto" src="/avatar.svg" alt="avatar"> <div class="mb-2 text-center">本来无一物，何处惹尘埃</div> <div class="flex items-center justify-center flex-wrap"> <a title="github" href="https://github.com/codetang-2417" target="_blank"> <i class="ri-github-fill text-2xl mr-2 cursor-pointer"></i> </a><a title="rss" href target="_blank"> <i class="ri-rss-fill text-2xl mr-2 cursor-pointer"></i> </a> </div> <div class="divider-horizontal-mini"></div> <div class="text-center"> <div> <i class="ri-folder-3-line menu-icon"></i>分类 </div> <div class="my-2 break-all truncate"> <a class="hover:text-skin-active" title="工具教程 (16)" href="/category/工具教程"> 工具教程 (16) </a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active" title="专业知识 (4)" href="/category/专业知识"> 专业知识 (4) </a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active" title="编程开发 (8)" href="/category/编程开发"> 编程开发 (8) </a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active" title="系统维护 (21)" href="/category/系统维护"> 系统维护 (21) </a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active" title="网络安全 (7)" href="/category/网络安全"> 网络安全 (7) </a> </div> <div class="divider-horizontal-mini"></div>
+          <div class="text-center"> <i class="ri-price-tag-3-line menu-icon"></i> 标签 </div> <div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="AI" href="/tags/AI">AI (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="iPhone" href="/tags/iPhone">iPhone (2)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Performance" href="/tags/Performance">Performance (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Linux" href="/tags/Linux">Linux (17)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Manjaro" href="/tags/Manjaro">Manjaro (8)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Bash" href="/tags/Bash">Bash (2)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Server" href="/tags/Server">Server (8)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Network" href="/tags/Network">Network (4)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Hardware" href="/tags/Hardware">Hardware (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Astro" href="/tags/Astro">Astro (2)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Github" href="/tags/Github">Github (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Blog" href="/tags/Blog">Blog (3)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Siyuan" href="/tags/Siyuan">Siyuan (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Archlinux" href="/tags/Archlinux">Archlinux (2)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Shell" href="/tags/Shell">Shell (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Downgrade" href="/tags/Downgrade">Downgrade (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Cursor" href="/tags/Cursor">Cursor (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Git" href="/tags/Git">Git (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Ubuntu" href="/tags/Ubuntu">Ubuntu (6)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Markdown" href="/tags/Markdown">Markdown (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Hugo" href="/tags/Hugo">Hugo (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Github pages" href="/tags/Github pages">Github pages (1)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Algorithm" href="/tags/Algorithm">Algorithm (3)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Docker" href="/tags/Docker">Docker (5)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="VPS" href="/tags/VPS">VPS (3)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="Proxy" href="/tags/Proxy">Proxy (4)</a> </div><div class="my-2 break-all truncate"> <a class="hover:text-skin-active my-2" title="QEMU" href="/tags/QEMU">QEMU (3)</a> </div> </div> </div> </header> <main class="container p-4  pt-20 text-skin-base min-h-full pb-32 relative" id="app"> <div class="grid grid-cols-4 gap-8"> <div class="col-span-4 xl:col-span-3 space-y-4 first:space-y-2"> <button class="flex items-center text-md cursor-pointer hover:text-skin-active outline-none" style="background-color: inherit;" onclick="history.back()"> <i class="ri-arrow-left-line mr-2"></i> <span>返回</span> </button>  <div> <div> <!-- title --> <h1 class="break-all text-2xl font-bold">Gitignore</h1> <div class="flex flex-wrap items-center my-2 text-skin-dodge"> <!-- date --> <div class="mr-2"><i class="ri-calendar-2-fill mr-1"></i>2024-02-22</div> <!-- draft -->  <!-- category --> <a href="/category/编程开发" class="text-wrap break-all hover:text-skin-active mr-2"><i class="ri-folder-3-line mr-1"></i>编程开发</a> <!-- tag --> <a href="/tags/Git" class="text-wrap break-all hover:text-skin-active mr-2"><i class="ri-hashtag mr-1"></i>Git</a> <!-- update --> <!--{--> <!--  lastModified && (--> <!--    <div class="mr-2"><i class="ri-calendar-check-fill "></i>{t('post.lastUpdated')}:{lastModified}</div>--> <!--  )--> <!--}--> <!-- minutes --> <div class="mr-2 flex items-center"><i class="ri-hourglass-fill mr-1"></i>14分钟</div>
+        <div class="mr-2 flex items-center"><i class="ri-quill-pen-line mr-1"></i>2616字</div> </div>  </div> <div class="divider-horizontal"></div> <article class="markdown-body"> <p>参考：<a href="https://blog.csdn.net/songyu0120/article/details/77848910">git中的.gitignore 的忽略规则</a>、<a href="https://blog.csdn.net/w8y56f/article/details/103263924">.gitignore文件语法和常见写法</a>、<a href="https://git-scm.com/docs/gitignore">git-scm.com/docs/gitignore</a></p>
+<h2 id="忽略规则的优先级">忽略规则的优先级</h2>
+<p>　　​<code>gitignore</code>​文件中的每一行都指定一个模式。当决定是否忽略该路径的文件时，Git 通常会检查来自多个源的<code>gitignore</code>​模式，按照以下优先级顺序，从最高到最低（在一个优先级内，最后匹配的模式决定结果）：</p>
+<ol>
+<li>从命令行中读取可用的忽略规则，从上往下依次读取</li>
+<li>当前目录定义的规则（即：如果在父目录中定义了一些模式，但在子目录的 <code>.gitignore</code>​ 中有冲突的模式，则<strong>子目录的规则会优先</strong>。）</li>
+<li>父级目录定义的规则，依次递推。</li>
+<li>$GIT_DIR/info/exclude 文件中定义的规则</li>
+<li>core.excludesfile中定义的全局规则</li>
+</ol>
+<p>　　注：这些模式是<strong>相对</strong>于 <code>.gitignore</code>​ 文件所在位置进行匹配的。这意味着如果 <code>.gitignore</code>​ 文件在某个子目录中，那么它定义的规则只适用于该子目录及其子目录中的文件。称<code>.gitignore</code>​文件所处的目录为根目录。</p>
+<h2 id="pattern的格式">PATTERN的格式</h2>
+<p>　　Pattern可以理解为我们在<code>gitignore</code>​文件中写下的每一行字符，可以理解为匹配的规则。</p>
+<ul>
+<li>
+<p>所有空行或者以 #（hash） 开头的行都会被 Git 忽略。其中以 # 开头的行用作注释。</p>
+<p># 的英文为 hash，对于以哈希开头的Pattern，需要在第一个哈希前面放置一个反斜杠（backslash）（“ <code>\</code>​ ”）。<code>\</code>​表示转义。</p>
+</li>
+<li>
+<p>末尾的空格也需要加<code>\</code>​转义，否则空格被忽略。</p>
+</li>
+<li>
+<p>前缀“ <code>!</code>​ ”，用于取消之前的排除规则。已经被前面的Pattern所排除的任何匹配文件（且符合当前Pattern的），将再次被包含在内。</p>
+<p>如果文件的开头就是<code>!</code>​那么需要在最开头添加<code>\</code>​，例如：<code>\~important!.txt</code>​</p>
+<p><strong>注意：</strong> 如果某个文件的<strong>上级目录已经被排除</strong>（例如上级目录在 <code>.gitignore</code>​ 中被忽略了），则无法通过 ”!” 将该文件重新包括进来。因为 Git 出于性能原因，不会保留已被排除的目录内容，因此即便你试图通过规则重新包括某个文件，这个操作也不会生效。</p>
+<p>举例：</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.r9qfg.css"><script type="module" src="/_astro/ec.dy9ns.js"></script><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre tabindex="0"><code><div class="ec-line"><div class="gutter"><div class="ln">1</div></div><div class="code"><span style="--0:#B392F0;--1:#6F42C1">qrkernel/</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">2</div></div><div class="code"><span style="--0:#F97583;--1:#BF3441">!</span><span style="--0:#B392F0;--1:#6F42C1">qrkernel/filelist.mk</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="qrkernel/!qrkernel/filelist.mk"><div></div></button></div></figure></div>
+<p>​<code>!qrkernel/filelist.mk</code>​操作是无效的，因为<code>qrkernel/</code>​表示排除当前根目录以及子目录中所有的<code>qrkernel</code>​目录。因此，文件<code>filelist.mk</code>​的上级目录已经被排除，所以再次包含<code>filelist.mk</code>​无效。</p>
+<p>正确的写法：</p>
+<div class="expressive-code"><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre tabindex="0"><code><div class="ec-line"><div class="gutter"><div class="ln">1</div></div><div class="code"><span style="--0:#B392F0;--1:#6F42C1">qrkernel/**</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">2</div></div><div class="code"><span style="--0:#F97583;--1:#BF3441">!</span><span style="--0:#B392F0;--1:#6F42C1">qrkernel/filelist.mk</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="qrkernel/**!qrkernel/filelist.mk"><div></div></button></div></figure></div>
+<p>​<code>qrkernel/**</code>​只排除<code>qrkernel</code>​目录下的文件和子目录及其内容，不会排除<code>qrkernel</code>​目录本身。</p>
+</li>
+<li>
+<p>“<code>/</code>​“（slash）符号用作文件夹<strong>分隔符</strong>，可以出现在pattern的开头，中间，结尾。</p>
+</li>
+<li>
+<p>“<code>/</code>​“出现在pattern的开头或者中间，或者两者同时出现，则表示pattern是<code>.gitignore</code>​所在的目录层级，否则，pattern表示的范围是<code>.gitignore</code>​当前目录及其子目录层级。</p>
+</li>
+<li>
+<p>如果模式末尾有“<code>/</code>​“，则该模式将仅匹配目录，否则该模式可以匹配文件和目录。</p>
+</li>
+<li>
+<p>例如，模式<code>doc/frotz/</code>​匹配<code>doc/frotz</code>​目录，但不匹配<code>a/doc/frotz</code>​目录；然而<code>frotz/</code>​匹配<code>frotz</code>​和<code>a/frotz</code>​目录（所有路径都以<code>.gitignore</code>​文件所处的文件夹为根目录，相对于该根目录进行匹配）。</p>
+</li>
+<li>
+<p>星号（asterisk）“ <code>*</code>​ ”匹配除“<code>/</code>​”之外的任何内容。字符“ <code>?</code>​ ”匹配除“ <code>/</code>​ ”之外的<strong>任意1个字符</strong>。范围表示法，例如<code>[a-zA-Z]</code>​ ，可用于匹配范围中的字符之一。有关更详细的说明，请参阅 fnmatch(3) 和 FNM_PATHNAME 标志。</p>
+</li>
+<li>
+<p>两个连续的“<code>*</code>​”，在全路径匹配pattern中有特殊的含义</p>
+<ul>
+<li>以<code>**/</code>​开头的pattern，表示在所有的文件夹中进行匹配。例如：“<code>**/foo</code>​“匹配<strong>当前根目录及所有子目录下</strong>的所有的以foo命名的文件以及文件夹，和pattern<code>foo</code>​等价。“<code>**/foo/bar</code>​“则匹配<strong>根目录及子目录下的foo目录</strong>下的所有<code>bar</code>​命名的文件及目录。</li>
+<li>以“ <code>/**</code>​ ”结尾的pattern，表示匹配目录中的所有内容。例如，“ <code>abc/**</code>​ ”匹配目录根目录下“ <code>abc</code>​ ”目录内的所有文件。</li>
+<li>​<code>/**/</code>​匹配任意目录，例如，“ <code>a/**/b</code>​ ”匹配“ <code>a/b</code>​ ”、“ <code>a/x/b</code>​ ”、“ <code>a/x/y/b</code>​ ”等。</li>
+</ul>
+</li>
+</ul>
+<p>　　​<code>.gitignore</code>​只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改<code>.gitignore</code>​是无效的。例如已经进行了提交，或者add的文件和目录，则需要<code>git rm -r --cached .</code>​ 命令，将<strong>当前目录下</strong>所有文件从 Git 的暂存区（Index）中移除，但是保留这些文件在工作目录中的状态。这意味着这些文件不再被 Git 跟踪，但仍然会保留在本地文件系统中，不会被删除。</p>
+<p>　　然后再修改<code>.gitignore</code>​文件，此时git就会按照新修正的<code>.gitignore</code>​进行索引。</p>
+<p>　　注意：建议只在需要移除的目录下使用该命令，如果在根目录下使用，会直接移除所有的文件索引。</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><div class="gutter"><div class="ln">1</div></div><div class="code"><span style="--0:#e1e4e8;--1:#24292e">git rm -r --cached .</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">2</div></div><div class="code"><span style="--0:#e1e4e8;--1:#24292e">git add .</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">3</div></div><div class="code"><span style="--0:#e1e4e8;--1:#24292e">git commit -m 'update .gitignore'</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="git rm -r --cached .git add .git commit -m &#x27;update .gitignore&#x27;"><div></div></button></div></figure></div>
+<h2 id="匹配规则举例">匹配规则举例</h2>
+<p>　　文件 <code>.gitignore</code>​ 的格式规范如下：</p>
+<ul>
+<li>
+<p>可以使用标准的 glob 模式匹配，它会递归地应用在整个工作区中。</p>
+</li>
+<li>
+<p>匹配是区分大小写的，如：/abc 和 /Abc 含义不同</p>
+</li>
+<li>
+<p>*~ 忽略所有以~结尾的文件（这种文件通常被许多编辑器标记为临时文件）</p>
+</li>
+<li>
+<p>空目录（包括隐藏目录）会被忽略，无法提交追踪<br>
+如果不希望空目录被忽略，需要在里头建.gitkeep文件</p>
+</li>
+</ul>
+<blockquote>
+<p>所谓的 glob 模式是指 shell 所使用的简化了的正则表达式。</p>
+<p>星号（*）匹配零个或多个任意字符；[abc] 匹配任何一个列在方括号中的字符 （这个例子要么匹配一个 a，要么匹配一个 b，要么匹配一个 c）。</p>
+<p>问号（?）只匹配一个任意字符；如果在方括号中使用短划线分隔两个字符， 表示所有在这两个字符范围内的都可以匹配（比如 [0-9] 表示匹配所有 0 到 9 的数字）。</p>
+<p>使用两个星号（ ** ）表示匹配任意中间目录，比如 a/**/z 可以匹配 a/z 、 a/b/z 或 a/b/c/z 等。</p>
+</blockquote>
+<h3 id="前提约定">前提约定</h3>
+<ol>
+<li>
+<p>约定1<br>
+“当前目录、子目录、子子目录…” 的表述包含的目录是：.gitignore文件所在的目录，以及该目录下的所有目录和它们的所有子目录及子子目录… 总之是这颗目录树的所有节点。</p>
+<p>例如：
+.gitignore文件在 /Users/stonewang/git-ignore-test/.gitignore，即.gitignore文件所在的目录为/Users/stonewang/git-ignore-test/。
+该表述的含义是：以/Users/stonewang/git-ignore-test/作为起点的所有目录树节点</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><div class="gutter"><div class="ln">1</div></div><div class="code"><span style="--0:#e1e4e8;--1:#24292e"># 该表述包含了dir1、dir2、dir1_sub、dir1_sub2、dir1_sub_sub、dir1_sub_sub2、dir1_sub2_sub</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">2</div></div><div class="code"><span style="--0:#e1e4e8;--1:#24292e">/Users/stonewang/git-ignore-test/</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">3</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#24292e">          </span></span><span style="--0:#e1e4e8;--1:#24292e">|-------.gitignore</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">4</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#24292e">          </span></span><span style="--0:#e1e4e8;--1:#24292e">|</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">5</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#24292e">          </span></span><span style="--0:#e1e4e8;--1:#24292e">|-------dir1</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">6</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#24292e">          </span></span><span style="--0:#e1e4e8;--1:#24292e">|        |----dir1_sub</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">7</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#24292e">          </span></span><span style="--0:#e1e4e8;--1:#24292e">|                |-----dir1_sub_sub</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">8</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#24292e">          </span></span><span style="--0:#e1e4e8;--1:#24292e">|                |-----dir1_sub_sub2</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">9</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#24292e">          </span></span><span style="--0:#e1e4e8;--1:#24292e">|        |----dir1_sub2</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">10</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#24292e">          </span></span><span style="--0:#e1e4e8;--1:#24292e">|                |-----dir1_sub2_sub</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">11</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#24292e">          </span></span><span style="--0:#e1e4e8;--1:#24292e">|</span></div></div><div class="ec-line"><div class="gutter"><div class="ln">12</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#24292e">          </span></span><span style="--0:#e1e4e8;--1:#24292e">|-------dir2</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="# 该表述包含了dir1、dir2、dir1_sub、dir1_sub2、dir1_sub_sub、dir1_sub_sub2、dir1_sub2_sub/Users/stonewang/git-ignore-test/          |-------.gitignore          |          |-------dir1          |        |----dir1_sub          |                |-----dir1_sub_sub          |                |-----dir1_sub_sub2          |        |----dir1_sub2          |                |-----dir1_sub2_sub          |          |-------dir2"><div></div></button></div></figure></div>
+<p>‍</p>
+</li>
+<li>
+<p>其他补充<br>
+目录（即文件夹）的名字有各种表现形式，如显示的、隐藏的、带扩展名的和不带扩展名的。例如：dir、.dir、dir.ext、.dir.ext</p>
+<p>文件名的形式也各种各样，如显示的，隐藏的，带扩展名的，不带扩展名的。如file、.file、file.ext、.file.ext</p>
+<p>在.gitignore中，以 / 结尾的只会匹配目录，不带 / 结尾的匹配文件和目录，注意没有一种写法仅匹配文件的</p>
+<p>在Mac和Windows中都不允许文件之间重名，目录之间重名，目录和文件之间重名。不区分大小写</p>
+<p>在Mac和Windows中，目录名都是允许带点的，如dir.ext 可以作为目录名（看起来就像文件的扩展名）</p>
+</li>
+</ol>
+<h3 id="详细例子">详细例子</h3>
+<ul>
+<li>
+<p>为了表述准确，引入自创数学符号</p>
+<ul>
+<li>(.gitignore)N 表示.gitignore文件所在的目录+所有子目录包括直接或间接</li>
+<li>(.gitignore)O 表示.gitignore文件所在的目录，不包括其任何子目录</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>写法</th><th>作用</th></tr></thead><tbody><tr><td>dir/</td><td>忽略 (.gitignore)N 中的dir目录（不包含子目录）</td></tr><tr><td>/dir/</td><td>忽略 (.gitignore)O 中的dir目录</td></tr><tr><td>file</td><td>忽略(.gitignore)N 中的file 文件&#x26;目录（名为file的目录也会被忽略）</td></tr><tr><td>/file</td><td>忽略(.gitignore)O 中的file文件</td></tr><tr><td>*.log</td><td>忽略(.gitignore)N 中的*.log 文件&#x26;目录（符合名字的目录也将被忽略）</td></tr><tr><td>/dir/file</td><td>忽略(.gitignore)O 中的dir目录下的file文件</td></tr><tr><td>/dir/Abc* 和 /dir/Abc <em>.java 和/dir/</em> .java</td><td>忽略(.gitignore)O 中的dir目录下符合Abc <em>（或Abc</em>.java或*.java）规则的文件&#x26;目录</td></tr><tr><td>/dir/Abc*/</td><td>忽略(.gitignore)O 中的dir目录下符合Abc*的目录（不忽略dir下的文件!）</td></tr><tr><td>/dir/*/</td><td>忽略(.gitignore)O 中的dir目录下的符合*的子目录（注意/sub/file的文件不会忽略）</td></tr><tr><td>/dir/<em>/</em> .txt</td><td>忽略(.gitignore)O 中的dir目录下的符合<em>的子目录下的，符合</em>.txt的文件&#x26;目录。注意是一个星，仅忽略一层，即/dir/sub/a.txt 和 /dir/sub/sub2/b.txt，仅仅忽略a.txt，不忽略b.txt，另外/dir/k.txt也不会被忽略</td></tr><tr><td>/dir/**/*.txt</td><td>忽略 (.gitignore)O 中的dir目录下的直接和间接子目录下的，符合*.txt的文件&#x26;目录。两个星号表示0-n层级的目录</td></tr><tr><td>/sub/** 和 /sub/ 是等价的</td><td>亲测。前者表示忽略/sub/下的所有直接或间接的目录和文件（**表示文件和目录，因为没有/结尾），后者表示忽略/sub/下的东西</td></tr><tr><td>/sub/**/ 和 /sub/ 是不等价的</td><td>亲测。前者明确表示忽略目录除掉了文件，所以对于/sub/file是不会被忽略的。</td></tr><tr><td>sub/ 和 /sub/ 含义不同</td><td>前者忽略(.gitignore)N下的sub目录，后者忽略(.gitignore)O下的sub</td></tr><tr><td>sub/abc/ 和 /sub/abc/</td><td><strong>这两个的含义完全相同（有点奇怪，本以为前者是递归所有的目录）</strong></td></tr><tr><td>**/src/main/java/ 和 src/main/java/</td><td>不等价。前者匹配(.gitignore)N下的src/main/java/ 目录，要满足这个目录的层级结构的。后者等价于/src/main/java/，仅仅忽略(.gitignore)O下的该目录</td></tr><tr><td>**/src/main/file.txt 和 src/main/file.txt</td><td>不等价。前者匹配(.gitignore)N下的src/main/file.txt，符合这个目录层级结构的将会被忽略，后者等价于/src/main/file.txt，仅仅忽略(.gitignore)O下所匹配的</td></tr><tr><td>**/dir/ 和 dir/</td><td>是等价的。上面的例子等价这个不等价，就是因为目录的层级数的问题导致的</td></tr><tr><td>**/file.txt 和 file.txt</td><td>是等价的。</td></tr><tr><td>先后写!a.txt和*.txt</td><td>后面的配置覆盖前面的，导致所有*.txt文件都被忽略（有点奇怪，实际测试确实如此）</td></tr><tr><td>先后写*.txt 和 !a.txt</td><td>正确。能够忽略除了a.txt外的文件。</td></tr><tr><td>对于.gitignore文件不在git仓库根目录的情况：参考特殊情况</td><td>（参考特殊情况）</td></tr></tbody></table> </article> <div class="divider-horizontal"></div> <div class="h-8 text-skin-base"> <a class="truncate  w-auto max-w-[40%] float-left" href="/blog/markdown-elements" title="Markdown elements"> <i class="ri-arrow-left-s-fill"></i> Markdown elements </a> <div class="flex item-center float-right w-auto max-w-[40%] text-right"> <a class="truncate " href="/blog/服务器开机自动发送ip邮件" title="服务器开机自动发送ip邮件"> 服务器开机自动发送ip邮件 </a> <i class="ri-arrow-right-s-fill float-right"></i> </div> </div> <div class="border-l-4 my-4 p-4 border-l-skin-base bg-skin-card break-all"> <div>本文标题：Gitignore</div> <div>文章作者：Lyndra</div> <div>发布时间：2024-02-22</div> <div> 原始链接：<a href="https://www.hysling.top/blog/gitignore" class="hover:text-skin-active">https://www.hysling.top/blog/gitignore</a> </div> </div>  </div>  <div class="giscus"></div> <script src="https://giscus.app/client.js" data-repo="codetang-2417/codetang-2417.github.io" data-repo-id="R_kgDOMyu4sg" data-category="Announcements" data-category-id="DIC_kwDOMyu4ss4CiiW6" data-mapping="title" data-strict="light" data-reactions-enabled="dark" data-emit-metadata="1" data-input-position="0" data-theme="light" data-lang="zh-CN" crossorigin="anonymous"></script> </div> <div class="hidden xl:block col-span-1 relative"> <div class="shadow-lg rounded-lg h-64 w-auto flex flex-col items-center justify-center bg-skin-card p-2"> <img class="avatar mb-4" src="/avatar.svg" alt="avatar"> <div class="mb-2 text-center">本来无一物，何处惹尘埃</div> <div class="flex items-center justify-center flex-wrap"> <a title="github" href="https://github.com/codetang-2417" target="_blank"> <i class="ri-github-fill text-2xl mr-2 cursor-pointer"></i> </a><a title="rss" href target="_blank"> <i class="ri-rss-fill text-2xl mr-2 cursor-pointer"></i> </a> </div> </div> <div id="toc" class="shadow-lg rounded-lg my-4 py-2 px-2 bg-skin-card sticky top-20" data-astro-cid-6t6zfk7k> <div class="aside-widget" data-astro-cid-6t6zfk7k> <i class="ri-list-check menu-icon" data-astro-cid-6t6zfk7k></i> 文章目录 </div> <div class="overflow-auto" data-astro-cid-6t6zfk7k> <div class="toc-container" data-astro-cid-6t6zfk7k></div> </div> </div>  <script type="module" src="/_astro/Toc.astro_astro_type_script_index_0_lang.R6DO86cs.js"></script> </div> <button type="button" id="scrollToTopBtn" class="header-btn fixed bottom-4 right-2 hidden" title="scroll to top"> <i class="ri-arrow-up-line"></i> </button> <script type="module">let o=document.getElementById("scrollToTopBtn");window.addEventListener("scroll",function(){window.scrollY>200?o.style.display="block":o.style.display="none"});o.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});</script> </div> <div class="h-16 container p-1 absolute left-0 bottom-0"> <div class="flex items-center justify-center text-skin-base"> <span id="busuanzi_container_site_pv"> 总访问量<span id="busuanzi_value_site_pv"></span>次 </span> <div class="divider-vertical"></div> <span id="busuanzi_container_site_uv"> 总访客数<span id="busuanzi_value_site_uv"></span>人次 </span> </div> <div class="flex items-center flex-col flex-wrap justify-center mb-4 text-skin-base first:mb-0 sm:flex-row"> <div> <span class="cursor-default">Copyright</span> <i class="ri-copyright-line align-middle"></i> <span class="align-middle">2025</span> </div>  <div class="divider-vertical"></div> <a href="/sitemap-0.xml">站点地图</a> </div> </div> </main> <script type="module" src="/_astro/BlogPost.astro_astro_type_script_index_0_lang.C_bBgou1.js"></script></body></html>

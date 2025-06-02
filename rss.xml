@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Lyndra&apos;s Blog</title><description>素处以默</description><link>https://www.hysling.top/</link><item><title>Manjaro外接显示器KDE Plasma桌面卡住解决方案</title><link>https://www.hysling.top/blog/manjaro-x11-%E5%8F%8C%E6%98%BE%E7%A4%BA%E5%B1%8F/</link><guid isPermaLink="true">https://www.hysling.top/blog/manjaro-x11-%E5%8F%8C%E6%98%BE%E7%A4%BA%E5%B1%8F/</guid><description> 问题出现背景
+
+我的笔记本是双显卡，一直用 Optimus 管理双显卡。外接显示器用的是独显，内置显示器用的是集显。桌面是 Kde Plasma X11。
+
+这套使用方案一直持续到2024年11月，后续我就没有外接显示器使用过了。这期间系统经历过几次升级，2025年5月时，...</description><pubDate>Wed, 14 May 2025 00:00:00 GMT</pubDate></item><item><title>Docker中创建镜像</title><link>https://www.hysling.top/blog/docker/docker%E4%B8%AD%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F/</link><guid isPermaLink="true">https://www.hysling.top/blog/docker/docker%E4%B8%AD%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F/</guid><description> Docker中创建镜像
+
+通过 Docker 创建符合某个应用开发环境的镜像，一般推荐使用 Dockerfile 来创建。使用 Dockerfile 创建镜像，可以复现，方便迁移。相较于使用 `docker commit` 保存容器数据的方式创建镜像，使用 Dockerfil...</description><pubDate>Thu, 06 Mar 2025 00:00:00 GMT</pubDate></item><item><title>Docker 数据卷 volume</title><link>https://www.hysling.top/blog/docker/docker%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8D%B7volume/</link><guid isPermaLink="true">https://www.hysling.top/blog/docker/docker%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8D%B7volume/</guid><description> Docker 数据卷 volume
+
+Docker 有两种共享数据的方式，一种是数据卷，一种是挂载主机目录。数据卷和挂载主机目录都需要宿主机的文件管理系统的支持，但两者的区别在于数据卷被创建在 Docker 的目录中，不受到其他宿主机上其他服务的影响，数据卷创建后的所有者是 ...</description><pubDate>Wed, 05 Mar 2025 00:00:00 GMT</pubDate></item><item><title>Bash 语法</title><link>https://www.hysling.top/blog/bash-%E8%AF%AD%E6%B3%95/</link><guid isPermaLink="true">https://www.hysling.top/blog/bash-%E8%AF%AD%E6%B3%95/</guid><description> Bash 语法
+
+Bash 在 Linux 中是比较常用的脚本语言。本文记录一些有用的 Bash 语法。
+
+ 特殊符号
+
+ Glob 通配符
+
+Glob 通配符是 Linux 中用来匹配文件名的符号。
+
+| 通配符 | 描述 | 例子 | 匹配 | 不匹配 |
+|-...</description><pubDate>Fri, 28 Feb 2025 00:00:00 GMT</pubDate></item><item><title>Shell 脚本模板</title><link>https://www.hysling.top/blog/shell-%E8%84%9A%E6%9C%AC%E6%A8%A1%E6%9D%BF/</link><guid isPermaLink="true">https://www.hysling.top/blog/shell-%E8%84%9A%E6%9C%AC%E6%A8%A1%E6%9D%BF/</guid><description> Shell 脚本模板
+
+在日常的开发工作中，我们经常需要编写一些脚本，来完成一些自动化工作，同时还能保存一些环境使用的配置。可以在一段时间后，仍然能保证快速地回忆和使用。
+
+但每一个脚本有可能需要传递命令行参数，如果为每一个脚本都撰写一套命令行解析，会比较麻烦，浪费时间。但不...</description><pubDate>Fri, 28 Feb 2025 00:00:00 GMT</pubDate></item><item><title>cursor-auto-free在Linux下的操作教程</title><link>https://www.hysling.top/blog/cursor-auto-free%E5%9C%A8linux%E4%B8%8B%E7%9A%84%E6%93%8D%E4%BD%9C%E6%95%99%E7%A8%8B/</link><guid isPermaLink="true">https://www.hysling.top/blog/cursor-auto-free%E5%9C%A8linux%E4%B8%8B%E7%9A%84%E6%93%8D%E4%BD%9C%E6%95%99%E7%A8%8B/</guid><description> cursor-auto-free在Linux下的操作教程
+
+ 免责声明
+
+　　本工具仅供学习研究使用，请遵守相关服务条款。使用本工具产生的任何后果由使用者自行承担。严禁将本工具用于任何商业用途，包括但不限于销售、租赁或其他营利行为。违反许可证条款的行为将承担相应的法律责任...</description><pubDate>Thu, 13 Feb 2025 11:29:58 GMT</pubDate></item><item><title>Docker 容器移动后用户权限问题</title><link>https://www.hysling.top/blog/docker/docker-%E5%AE%B9%E5%99%A8%E7%A7%BB%E5%8A%A8%E5%90%8E%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/</link><guid isPermaLink="true">https://www.hysling.top/blog/docker/docker-%E5%AE%B9%E5%99%A8%E7%A7%BB%E5%8A%A8%E5%90%8E%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/</guid><description> Docker 容器移动后用户权限问题
+
+　　将docker的容器从服务器转移到本地后，会发现本地用户的id和服务器上的用户不同，需要更改以后才能有权限操作文件。
+
+　　先查看当前本地用户的id
+
+```yaml
+$ id
+uid=1000(ling) gid=1000(lin...</description><pubDate>Thu, 23 Jan 2025 13:50:43 GMT</pubDate></item><item><title>Astro 博客搭建与部署</title><link>https://www.hysling.top/blog/astro-%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%83%A8%E7%BD%B2/</link><guid isPermaLink="true">https://www.hysling.top/blog/astro-%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%83%A8%E7%BD%B2/</guid><description> Astro 博客搭建与部署
+
+　　基于 [astro.build](https://astro.build/) 搭建博客。可部署在服务器、[www.netlify.com](https://www.netlify.com/)、github pages。
+
+　　在网上还看到有自...</description><pubDate>Tue, 14 Jan 2025 11:11:41 GMT</pubDate></item><item><title>年轻人的第一台VPS：Reality 节点搭建</title><link>https://www.hysling.top/blog/proxy/%E5%B9%B4%E8%BD%BB%E4%BA%BA%E7%9A%84%E7%AC%AC%E4%B8%80%E5%8F%B0vpsreality-%E8%8A%82%E7%82%B9%E6%90%AD%E5%BB%BA/</link><guid isPermaLink="true">https://www.hysling.top/blog/proxy/%E5%B9%B4%E8%BD%BB%E4%BA%BA%E7%9A%84%E7%AC%AC%E4%B8%80%E5%8F%B0vpsreality-%E8%8A%82%E7%82%B9%E6%90%AD%E5%BB%BA/</guid><description> 年轻人的第一台VPS：Reality 节点搭建
+
+　　通过 3X-UI 或者 X-UI 搭建节点。
+
+　　在第一篇自建节点的教程中：[年轻人的第一台 VPS 代理服务器](https://www.hysling.top/blog/proxy/%E5%B9%B4%E8%BD%B...</description><pubDate>Sat, 11 Jan 2025 20:14:36 GMT</pubDate></item><item><title>自建服务器使用</title><link>https://www.hysling.top/blog/proxy/%E8%87%AA%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8/</link><guid isPermaLink="true">https://www.hysling.top/blog/proxy/%E8%87%AA%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8/</guid><description> 自建服务器使用
+
+　　会发送给你 **移动端** 和 **电脑端** 的订阅链接，分别导入使用即可。
+
+ 代理软件
+
+ 安卓/ios
+
+　　使用免费软件 sing-box。
+
+　　ios 需要美区账号才能下载，可以参考：[美区账号免费注册](https://www....</description><pubDate>Mon, 23 Dec 2024 15:42:35 GMT</pubDate></item><item><title>年轻人的第一台 VPS 代理服务器</title><link>https://www.hysling.top/blog/proxy/%E5%B9%B4%E8%BD%BB%E4%BA%BA%E7%9A%84%E7%AC%AC%E4%B8%80%E5%8F%B0-vps-%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</link><guid isPermaLink="true">https://www.hysling.top/blog/proxy/%E5%B9%B4%E8%BD%BB%E4%BA%BA%E7%9A%84%E7%AC%AC%E4%B8%80%E5%8F%B0-vps-%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid><description> 年轻人的第一台 VPS 代理服务器
+
+ 免责声明
+
+　　本文涉及的任何解锁和解密分析脚本仅用于资源共享和学习研究，不能保证其合法性，准确性，完整性和有效性，请根据情况自行判断。
+
+　　间接使用脚本的任何用户，包括但不限于建立VPS或在某些行为违反国家/地区法律或相关法规的...</description><pubDate>Fri, 20 Dec 2024 21:40:13 GMT</pubDate></item><item><title>Linux 多线程压缩与解压缩</title><link>https://www.hysling.top/blog/linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8E%8B%E7%BC%A9%E4%B8%8E%E8%A7%A3%E5%8E%8B%E7%BC%A9/</link><guid isPermaLink="true">https://www.hysling.top/blog/linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8E%8B%E7%BC%A9%E4%B8%8E%E8%A7%A3%E5%8E%8B%E7%BC%A9/</guid><description> Linux 多线程压缩与解压缩
+
+　　​`tar`​ 和 `gzip`​ 都是 Linux 和 Unix 系统中常用的归档和压缩工具，但它们的功能和作用有所不同。
+
+　　​`tar`​ 是 Linux 和类 Unix 系统中用于归档文件和目录的命令。其全称是 &quot;tape ar...</description><pubDate>Mon, 16 Dec 2024 17:03:59 GMT</pubDate></item><item><title>sudo免密码</title><link>https://www.hysling.top/blog/sudo%E5%85%8D%E5%AF%86%E7%A0%81/</link><guid isPermaLink="true">https://www.hysling.top/blog/sudo%E5%85%8D%E5%AF%86%E7%A0%81/</guid><description>​`sudo`​ 能通过精细化的授权配置（/etc/sudoers 文件）和密码验证，帮助管理员更安全、灵活地控制用户权限。一般都会设立一个超级管理员权限组，将有管理员用户加入到超级管理员用户组，就可以通过 `sudo`​ 临时获取超级管理员权限执行命令。
+
+ 查看超级管理员...</description><pubDate>Fri, 06 Dec 2024 00:00:00 GMT</pubDate></item><item><title>校内服务器使用指南</title><link>https://www.hysling.top/blog/%E6%A0%A1%E5%86%85%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link><guid isPermaLink="true">https://www.hysling.top/blog/%E6%A0%A1%E5%86%85%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid><description> 获取账号及连接服务器
+
+　　咨询管理员获取。例如：
+
+```bash
+用户名
+san.zhang@10.1.2.3
+密码
+zhangsan123&amp;
+GUI 图形界面 VNC 端口 5901
+```
+
+ Linux 命令行连接
+
+　　在终端中，使用 ssh 命令
+
+``...</description><pubDate>Wed, 04 Dec 2024 00:00:00 GMT</pubDate></item><item><title>校内服务器管理员手册</title><link>https://www.hysling.top/blog/%E6%A0%A1%E5%86%85%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%A1%E7%90%86%E5%91%98%E6%89%8B%E5%86%8C/</link><guid isPermaLink="true">https://www.hysling.top/blog/%E6%A0%A1%E5%86%85%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%A1%E7%90%86%E5%91%98%E6%89%8B%E5%86%8C/</guid><description> 搭建 VNC 服务
+
+　　参考：[linux ubuntu搭建不同用户的VNC](https://www.hysling.top/blog/%E6%A0%A1%E5%86%85%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%A1%E7%90%86%E5%...</description><pubDate>Wed, 04 Dec 2024 00:00:00 GMT</pubDate></item><item><title>qbittorrent 校验大文件导致Linux内核出问题</title><link>https://www.hysling.top/blog/qbittorrent-%E6%A0%A1%E9%AA%8C%E5%A4%A7%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4linux%E5%86%85%E6%A0%B8%E5%87%BA%E9%97%AE%E9%A2%98/</link><guid isPermaLink="true">https://www.hysling.top/blog/qbittorrent-%E6%A0%A1%E9%AA%8C%E5%A4%A7%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4linux%E5%86%85%E6%A0%B8%E5%87%BA%E9%97%AE%E9%A2%98/</guid><description> 问题
+
+　　在 `qbittorrent`​ 校验大文件时（大概100GB以上？），会出现无法启动新应用的情况。
+
+　　KDE 还会在一段时间后，弹出下列通知
+
+```txt
+Did not receive a reply. Possible causes include:...</description><pubDate>Sun, 17 Nov 2024 00:00:00 GMT</pubDate></item><item><title>Clash 配置</title><link>https://www.hysling.top/blog/clash-%E9%85%8D%E7%BD%AE/</link><guid isPermaLink="true">https://www.hysling.top/blog/clash-%E9%85%8D%E7%BD%AE/</guid><description>使用 mihomo-party 为 Clash.Meta 的前端 GUI软件。对 Clash 进行配置。
+
+　　推荐使用**虚拟网卡**模式，可以解决 DNS 泄漏问题，否则可能出现无法访问 GPT 的现象。系统代理可以同时开启，不开启没有影响，如果有时遇到其他网站可以访问，某些...</description><pubDate>Tue, 05 Nov 2024 00:00:00 GMT</pubDate></item><item><title>Time 同步</title><link>https://www.hysling.top/blog/time-%E5%90%8C%E6%AD%A5/</link><guid isPermaLink="true">https://www.hysling.top/blog/time-%E5%90%8C%E6%AD%A5/</guid><description>使用 Manjaro，最近发现时间不同步。Manjaro 目前使用 systemd-timesyncd 服务同步时间。可通过下列命令查看服务状态：
+
+```bash
+$ systemctl status systemd-timesyncd.service
+○ systemd-ti...</description><pubDate>Tue, 05 Nov 2024 00:00:00 GMT</pubDate></item><item><title>网络原理及 DNS 泄漏简析</title><link>https://www.hysling.top/blog/proxy/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A-dns-%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/</link><guid isPermaLink="true">https://www.hysling.top/blog/proxy/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8F%8A-dns-%E6%B3%84%E6%BC%8F%E7%AE%80%E6%9E%90/</guid><description> 网络代理的三种方案
+
+* 系统代理：将数据交给本地 http/socks 服务
+* TUN/TAP：使用虚拟网卡接管系统全局流量
+* 真 VPN：封装网络层数据包的真正意义上的VPN
+
+　　其中 TUN 模拟用的最广泛，因为 GPT、奈飞等网站会检测代理模式上网而禁止访问对...</description><pubDate>Sun, 03 Nov 2024 00:00:00 GMT</pubDate></item><item><title>QEMU开发环境搭建</title><link>https://www.hysling.top/blog/qemu/qemu%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link><guid isPermaLink="true">https://www.hysling.top/blog/qemu/qemu%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid><description>QEMU开源软件在Linux上进行开发。在windows上可以采用WSL Linux，也可以自行在电脑上安装Linux原生系统。一般采用vscode作为IDE 开发QEMU。
+
+　　本文采用 vscode 连接校内 ubuntu 服务器的方式进行开发环境搭建。ubuntu服务器多...</description><pubDate>Wed, 30 Oct 2024 00:00:00 GMT</pubDate></item></channel></rss>
